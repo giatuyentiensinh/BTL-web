@@ -1,0 +1,30 @@
+<div class="container" ng-controller="AdminProductCtrl">
+	<div class="row">
+		<div class="col-md-12 table-responsive">
+
+			<table class="table table-hover table-bordered">
+				<thead class="h4 bg-info">
+					<td><span class="fa fa-list"></span> Ma san pham</td>
+					<td><span class="glyphicon glyphicon-phone"></span> Ten</td>
+					<td><span class="fa fa-usd"></span> Gia</td>
+					<td><span class="fa fa-institution"></span> Nha cung cap</td>
+					<td></td>
+				</thead>
+				<tbody>
+					<tr ng-repeat="phone in phones">
+						<td>{{phone.id}}</td>
+						<td>{{phone.name}}</td>
+						<td>{{phone.price}}</td>
+						<td>{{phone.provider}}</td>
+						<td>
+							<p class="btn btn-primary"><span class="fa fa-eraser"></span> Sua</p>
+							<p class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Xoa</p>
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+		<p class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Them san pham moi</p>
+	</div>
+</div>

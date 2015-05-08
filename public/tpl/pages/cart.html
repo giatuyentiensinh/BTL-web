@@ -1,0 +1,135 @@
+<div ui-view="header"></div>
+
+<div class="container">
+
+	<div class="row" ng-controller="cartCtrl">
+
+		<div class="col-md-12">
+			<p class="btn btn-default" ui-sref="main.home" ui-sref-active><i class="glyphicon glyphicon-shopping-cart"></i>Tiep tuc mua hang</p>				
+			<p class="btn btn-success" data-target="#checkout" data-toggle="collapse" ng-disabled="carts.length < 1">Lap hoa don <i class="caret"></i></p>
+		</div>
+
+
+		<div id="checkout" class="collapse col-md-12" style="padding: 20px;">
+
+			<div class="col-md-5">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<div class="panel-title">So luong san pham</div>
+					</div>
+					<div class="panel-body">
+						<table class="table">
+							<thead class="h4">
+								<tr>
+									<td><span class="glyphicon glyphicon-phone"></span> San pham</td>
+									<td>So luong</td>
+									<td><span class="fa fa-usd"></span> Gia</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="cart in carts">
+									<td>{{cart.name}}</td>
+									<td ng-init="total.quantity = total.quantity + cart.quantity">{{cart.quantity}}</td>
+									<td><span ng-bind="cart.quantity * cart.price | number"></span> VND</td>
+								</tr>
+								<tr class="danger">
+									<td>Tong</td>
+									<td>{{count}}</td>
+									<td>{{totalCost() | number}} VND</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-7">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<div class="panel-title"><i class="fa fa-user"></i> Thong tin khach hang</div>
+					</div>
+
+					<div class="panel-body">
+						<form class="form-horizontal" name="payAccount">
+							<div class="form-group">
+								<label class="col-md-3 control-label">Ten <span class="glyphicon glyphicon-user"></span></label>
+								<div class="col-md-9">
+									<input type="text" placeholder="Nhap ten cua ban" name="username" ng-model="username" required />
+								</div>
+							</div>
+				
+							<div class="form-group">
+								<label class="col-md-3 control-label">So dien thoai <span class="fa fa-phone-square"></span></label>
+								<div class="col-md-9">
+									<input type="text" placeholder="Nhap sdt cua ban" name="phonenumber" ng-model="phonenumber" required/>
+								</div>
+							</div>
+				
+							<div class="form-group">
+								<label class="col-md-3 control-label">Email <span class="glyphicon glyphicon-envelope"></span></label>
+								<div class="col-md-9">
+									<input type="email" class="form-control" placeholder="Nhap Email cua ban" name="email" ng-model="email" required />
+								</div>
+							</div>
+				
+							<div class="form-group">
+								<label class="col-md-3 control-label">Dia chi <span class="glyphicon glyphicon-home"></span></label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" placeholder="Nhap dia chi cua ban" name="address" ng-model="address" required/>
+								</div>
+							</div>
+				
+							<div class="button-group pull-right">
+								<button class="btn btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span> Xoa</button>
+								<button class="btn btn-primary" type="submit" ng-click="submit()" ng-disabled="payAccount.$invalid"><span class="fa fa-check"></span> Gui</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="col-md-12" style="padding-top: 20px;">
+			<div class="panel panel-warning">
+				<div class="panel-heading">
+					<div class="panel-title"><i class="fa fa-shopping-cart"></i> Gio hang</div>
+				</div>
+
+				<div class="panel-body table-responsive">
+					<table class="table table-hover table-condensed well">
+						<thead>
+							<tr class="info h4 text-center">
+								<td><span class="glyphicon glyphicon-phone"></span>San pham</td>
+								<td></td>
+								<td><span class="fa fa-usd"></span> Gia</td>
+								<td>So luong</td>
+								<td><span class="fa fa-money"></span> Tong tien</td>
+								<td></td>
+							</tr>
+						</thead>
+						<tbody class="text-center">
+							<tr ng-repeat="cart in carts">
+								<td><img width="200px" height="100px" ng-src="{{cart.image}}" /></td>
+								<td>
+									<p class="h5">{{cart.name}}</p>
+									<p>ID: {{cart.id}}</p>
+								</td>
+								<td>{{cart.price | number}} VND</td>
+								<td>
+									<input type="number" ng-model="cart.quantity" min="1" ng-change="increPhone(cart.id, cart.quantity)"/>
+								</td>
+								<td class="text-danger h5"><span ng-bind="cart.quantity * cart.price | number"></span> VND</td>
+								<td><span class="btn btn-danger fa fa-trash-o" ng-click="itemDetele(cart.id)"></span></td>
+							</tr>		
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div ui-view="footer"></div>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Home</title>
+		<script type="text/javascript" src="vendor/angular.min.js"></script>
+		<script type="text/javascript" src="vendor/angular-ui-router.js"></script>
+		<script type="text/javascript" src="vendor/jquery.js"></script>
+		<script type="text/javascript" src="vendor/bootstrap.min.js"></script>
+		<script type="text/javascript" src="vendor/angular-cookies.js"></script>
+		<script type="text/javascript" src="vendor/ui-load.js"></script>
+		
+		<script type="text/javascript" src="js/config.js"></script>
+		<script type="text/javascript" src="js/config.router.js"></script>
+		<script type="text/javascript" src="js/admin.loginCtrl.js"></script>
+		<script type="text/javascript" src="js/productCtrl.js"></script>
+		<script type="text/javascript" src="js/leftnavCtrl.js"></script>
+		<script type="text/javascript" src="js/listDetailCtrl.js"></script>
+		<script type="text/javascript" src="js/cartCtrl.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="css/paper.bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/simple-line-icons.css" />
+		<!-- Dynamic lazyload controller -->
+	</head>
+	<body>
+		<div ng-app="App">
+			<div ui-view></div>
+		</div>
+	</body>
+</html>

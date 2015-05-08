@@ -1,0 +1,28 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET		/		controllers.Assets.at(path="/public", file="index.html")
+
+GET		/admin		controllers.Assets.at(path="/public", file="admin-index.html")
+
+GET		/store/phone	controllers.Application.phone()
+GET		/store/phone/:id controllers.Application.phoneId(id: String)
+
+GET		/store/category controllers.Application.category()
+
+POST	/addCart	controllers.Application.addCartSession()
+GET		/store/readListCart	 controllers.Application.readListCart()
+DELETE	/store/readListCart	 controllers.Application.deleteCart()
+
+
+POST	/login		controllers.Authentication.login()
+
+# Map statics from the /public folder to the /assets URL path
+GET		/css/*file		controllers.Assets.at(path="/public/css", file)
+GET		/vendor/*file		controllers.Assets.at(path="/public/vendor", file)
+GET		/js/*file		controllers.Assets.at(path="/public/js", file)
+GET		/imgs/*file		controllers.Assets.at(path="/public/imgs", file)
+GET		/fonts/*file		controllers.Assets.at(path="/public/fonts", file)
+GET		/tpl/*file		controllers.Assets.at(path="/public/tpl", file)

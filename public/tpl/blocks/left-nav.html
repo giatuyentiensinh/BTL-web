@@ -1,0 +1,67 @@
+<!-- Category -->
+<div class="panel-group">
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div data-target="#phone1" data-toggle="collapse">
+				<h4 class="panel-title">Phone 1<a class="badge pull-right"><span class="fa fa-plus-circle"></span></a></h4>
+			</div>
+			<div id="phone1" class="panel-collapse collapse">
+				<div class="panel-body">
+					<ul class="list-unstyled">
+						<li>.</li>
+						<li>.</li>
+						<li>.</li>
+						<li>.</li>
+						<li>.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div data-target="#phone2" data-toggle="collapse">
+				<h4 class="panel-title">Phone 2<a class="badge pull-right"><span class="fa fa-plus-circle"></span></a></h4>
+			</div>
+			<div id="phone2" class="panel-collapse collapse">
+				<div class="panel-body">
+					<ul class="list-unstyled">
+						<li>.</li>
+						<li>.</li>
+						<li>.</li>
+						<li>.</li>
+						<li>.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div data-target="#phone3" data-toggle="collapse">
+				<h4 class="panel-title">Phone 3<a class="badge pull-right"><span class="fa fa-plus-circle"></span></a></h4>
+			</div>
+			<div id="phone3" class="panel-collapse collapse">
+				<div class="panel-body">
+					<ul class="list-unstyled">
+						<li>.</li>
+						<li>.</li>
+						<li>.</li>
+						<li>.</li>
+						<li>.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<ul class="nav nav-pills nav-stacked" ng-controller="leftnavCtrl">
+		<li ng-repeat="provider in categories">
+			<a href="#"><span class="pull-right">({{$index + 1}})</span>{{provider}}</a>
+		</li>		
+	</ul>
+</div>
+<!-- /Category -->

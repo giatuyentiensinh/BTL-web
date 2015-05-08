@@ -1,0 +1,21 @@
+<div ui-view="header"></div>
+<div ui-view="banner"></div>
+<div class="container" style="margin-top: 15px;">
+	<div class="row">
+		<div class="col-md-3">
+			<div ui-view="left-menu"></div>
+		</div>
+		<div class="col-md-9 well">
+			<div ui-view="contain"></div>			
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid" style="margin: 8px;">
+	<div class="row">
+		<div class="col-md-12 well">
+			<div ui-view="recommend"></div>
+		</div>
+	</div>
+</div>
+<div ui-view="footer"></div>

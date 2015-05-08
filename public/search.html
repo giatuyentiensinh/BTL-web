@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ngCookies</title>
+		<meta charset="utf-8" />
+		<script type="text/javascript" src="vendor/angular.min.js"></script>
+		<script type="text/javascript" src="vendor/angular-cookies.js"></script>
+		<script type="text/javascript">
+			'use strict'
+			angular.module('app', ['ngCookies'])
+				.controller('ctrl', function($scope, $http) {					
+					$http.get('/store/phone')
+						.success(function(data) {
+							$scope.data = data;
+						})
+						.error(function(data) {
+							console.log('error cmrn');
+						});
+				});
+		</script>
+	</head>
+	<body ng-app="app">
+		<div ng-controller="ctrl">
+			<table border="1">
+				<tr ng-repeat="dat in data | filter:search:id">
+					<td>{{dat.id}}</td>
+					<td>{{dat.name}}</td>
+					<td>{{dat.size}}</td>
+					<td>{{dat.weight}}</td>
+					<td>{{dat.price}}</td>
+					<td>{{dat.configuration | json}}</td>
+				</tr>
+			</table>
+			<input type="text" ng-model="search"/>
+		</div>		
+	</body>
+</html>
