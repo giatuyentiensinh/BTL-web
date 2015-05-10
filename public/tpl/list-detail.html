@@ -3,31 +3,31 @@
 		<img class="img-thumbnail" ng-src="{{phone.image}}"></img>
 		<ul class="list-inline text-center">
 			<li class="h4 text-warning">{{phone.price | number}} VND</li>
-			<li><p class="btn btn-warning" ng-click="addCart(phone.price)"><i class="fa fa-shopping-cart"></i> Them vao gio</p></li>
+			<li><p class="btn btn-warning" ng-click="addCart()"><i class="fa fa-shopping-cart"></i> Them vao gio</p></li>
 		</ul>
 	</div>
 
 	<div class="col-md-7">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="panel-title">Chi tiet san pham</div>
+				<div class="panel-title">Chi tiết sản phẩm</div>
 			</div>
 			<div class="panel-body">
 				<h3>{{phone.name}}</h3>
 				<p>WebID: <i>{{phone.id}}</i></p>
 				<p>rate: <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
 				<p>OS: {{phone.configuration.OS}}</p>
-				<p>Man hinh: {{phone.configuration.display}}</p>
-				<p>Kich thuoc: {{phone.size}}</p>
-				<p>Trong luong: {{phone.weight}} g</p>
-				<p>Bo xu ly : {{phone.configuration.cpu}}</p>
+				<p>Màn hình: {{phone.configuration.display}}</p>
+				<p>Kích thước: {{phone.size}}</p>
+				<p>Trọng lượng: {{phone.weight}} g</p>
+				<p>Bộ xử lý : {{phone.configuration.cpu}}</p>
 				<p>RAM : {{phone.configuration.ram}}</p>
 				<p>PIN : {{phone.configuration.pin}}</p>
 				<p>Wifi: {{phone.configuration.network.wifi}}</p>
 				<p>Bluetooth: {{phone.configuration.network.bluetooth}}</p>
-				<p>Camera truoc: {{phone.configuration.camera.front}}, sau: {{phone.configuration.camera.back}}</p>
-				<p>Tinh trang: Con hang</p>
-				<p>Hang san xuat: {{phone.provider}}</p>
+				<p>Camera trước: {{phone.configuration.camera.front}}, Camera sau: {{phone.configuration.camera.back}}</p>
+				<p>Tình trạng: còn hàng</p>
+				<p>Hãng sản xuất: {{phone.provider}}</p>
 			</div>
 		</div>		
 	</div>

@@ -1,29 +1,29 @@
 <div ui-view="header"></div>
 
-<div class="container">
+<div class="container" ng-controller="cartCtrl">
 
-	<div class="row" ng-controller="cartCtrl">
+	<div class="row" ng-init="loadItem()">
 
 		<div class="col-md-12">
-			<p class="btn btn-default" ui-sref="main.home" ui-sref-active><i class="glyphicon glyphicon-shopping-cart"></i>Tiep tuc mua hang</p>				
-			<p class="btn btn-success" data-target="#checkout" data-toggle="collapse" ng-disabled="carts.length < 1">Lap hoa don <i class="caret"></i></p>
+			<p class="btn btn-default" ui-sref="main.home" ui-sref-active><i class="glyphicon glyphicon-shopping-cart"></i>Tiếp tục mua hàng</p>				
+			<p class="btn btn-success" ng-init="isCollapsed = true" ng-click="isCollapsed = ! isCollapsed" ng-disabled="carts.length < 1">Lập hoá đơn <i class="caret"></i></p>
 		</div>
 
 
-		<div id="checkout" class="collapse col-md-12" style="padding: 20px;">
+		<div class="col-md-12" collapse="isCollapsed" style="padding: 20px;">
 
 			<div class="col-md-5">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<div class="panel-title">So luong san pham</div>
+						<div class="panel-title">Số lượng sản phẩm</div>
 					</div>
 					<div class="panel-body">
 						<table class="table">
 							<thead class="h4">
 								<tr>
-									<td><span class="glyphicon glyphicon-phone"></span> San pham</td>
-									<td>So luong</td>
-									<td><span class="fa fa-usd"></span> Gia</td>
+									<td><span class="glyphicon glyphicon-phone"></span> Sản phẩm</td>
+									<td>Số lượng</td>
+									<td><span class="fa fa-usd"></span> Giá</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -33,7 +33,7 @@
 									<td><span ng-bind="cart.quantity * cart.price | number"></span> VND</td>
 								</tr>
 								<tr class="danger">
-									<td>Tong</td>
+									<td>Tổng</td>
 									<td>{{count}}</td>
 									<td>{{totalCost() | number}} VND</td>
 								</tr>
@@ -46,46 +46,65 @@
 			<div class="col-md-7">
 				<div class="panel panel-info">
 					<div class="panel-heading">
-						<div class="panel-title"><i class="fa fa-user"></i> Thong tin khach hang</div>
+						<div class="panel-title"><i class="fa fa-user"></i> Thông tin khách hàng</div>
 					</div>
 
 					<div class="panel-body">
+
 						<form class="form-horizontal" name="payAccount">
 							<div class="form-group">
-								<label class="col-md-3 control-label">Ten <span class="glyphicon glyphicon-user"></span></label>
+								<label class="col-md-3 control-label">Tên <span class="glyphicon glyphicon-user"></span></label>
 								<div class="col-md-9">
-									<input type="text" placeholder="Nhap ten cua ban" name="username" ng-model="username" required />
+									<input type="text" placeholder="Nhập tên của bạn" name="username" ng-model="username" required />
 								</div>
 							</div>
 				
 							<div class="form-group">
-								<label class="col-md-3 control-label">So dien thoai <span class="fa fa-phone-square"></span></label>
+								<label class="col-md-3 control-label">Số điện thoại <span class="fa fa-phone-square"></span></label>
 								<div class="col-md-9">
-									<input type="text" placeholder="Nhap sdt cua ban" name="phonenumber" ng-model="phonenumber" required/>
+									<input type="text" placeholder="Nhập sđt của bạn" name="phonenumber" ng-model="phonenumber" required/>
 								</div>
 							</div>
 				
 							<div class="form-group">
 								<label class="col-md-3 control-label">Email <span class="glyphicon glyphicon-envelope"></span></label>
 								<div class="col-md-9">
-									<input type="email" class="form-control" placeholder="Nhap Email cua ban" name="email" ng-model="email" required />
+									<input type="email" class="form-control" placeholder="Nhập Email của bạn" name="email" ng-model="email" required />
 								</div>
 							</div>
 				
 							<div class="form-group">
-								<label class="col-md-3 control-label">Dia chi <span class="glyphicon glyphicon-home"></span></label>
+								<label class="col-md-3 control-label">Địa chỉ <span class="glyphicon glyphicon-home"></span></label>
 								<div class="col-md-9">
-									<input type="text" class="form-control" placeholder="Nhap dia chi cua ban" name="address" ng-model="address" required/>
+									<input type="text" class="form-control" placeholder="Nhập địa chỉ của bạn" name="address" ng-model="address" required/>
 								</div>
 							</div>
 				
 							<div class="button-group pull-right">
-								<button class="btn btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span> Xoa</button>
-								<button class="btn btn-primary" type="submit" ng-click="submit()" ng-disabled="payAccount.$invalid"><span class="fa fa-check"></span> Gui</button>
+								<button class="btn btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span> Xóa</button>
+								<button class="btn btn-primary" type="submit" ng-click="submit()" ng-disabled="payAccount.$invalid"><span class="fa fa-check"></span> Gửi</button>
 							</div>
 						</form>
+						
 					</div>
 				</div>
+
+				<div class="alert alert-success" ng-hide="check" ng-click="closeAlert()">
+					<p class="close" ng-click="closeAlert()">
+					  	<span aria-hidden="true">&times;</span>
+					</p>
+					<p>Phiên giao dịch thành công</p>
+					<p>Cảm ơn bạn đã mua hàng của chúng tôi, chúng tôi sẽ giao hàng cho bạn sau.</p>
+					<p class="text-info">click vào đây để quay về trang chủ</p>
+				</div>
+
+				<div class="alert alert-danger" ng-hide="checkError" ng-click="closeAlert()">
+					<p class="close" ng-click="closeAlert()">
+					  	<span aria-hidden="true">&times;</span>
+					</p>
+					<p>Phiên giao dịch thất bại, bạn hãy thử lại sau</p>
+				</div>
+
 			</div>
 		</div>
 
@@ -94,18 +113,18 @@
 		<div class="col-md-12" style="padding-top: 20px;">
 			<div class="panel panel-warning">
 				<div class="panel-heading">
-					<div class="panel-title"><i class="fa fa-shopping-cart"></i> Gio hang</div>
+					<div class="panel-title"><i class="fa fa-shopping-cart"></i> Giỏ hàng</div>
 				</div>
 
 				<div class="panel-body table-responsive">
 					<table class="table table-hover table-condensed well">
 						<thead>
 							<tr class="info h4 text-center">
-								<td><span class="glyphicon glyphicon-phone"></span>San pham</td>
+								<td><span class="glyphicon glyphicon-phone"></span>Sản phẩm</td>
 								<td></td>
-								<td><span class="fa fa-usd"></span> Gia</td>
-								<td>So luong</td>
-								<td><span class="fa fa-money"></span> Tong tien</td>
+								<td><span class="fa fa-usd"></span> Giá</td>
+								<td>Số lượng</td>
+								<td><span class="fa fa-money"></span> Tổng tiền</td>
 								<td></td>
 							</tr>
 						</thead>

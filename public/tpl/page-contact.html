@@ -4,7 +4,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-title text-center">
-					<strong class="text-info h1"><span class="fa fa-tags"></span> Gioi thieu</strong>
+					<strong class="text-info h1"><span class="fa fa-tags"></span> Giới thiệu</strong>
 				</div>
 			</div>
 			<div class="panel-body">
@@ -16,53 +16,67 @@
 		</div>
 	</div>
 
-	<div class="col-md-8">
+	<div class="col-md-8" ng-controller="contactCtrl">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<div class="panel-title"><i class="icon-envelope"></i> Phan hoi</div>
+				<div class="panel-title"><i class="icon-envelope"></i> Góp ý về trang web</div>
 			</div>
 			<div class="panel-body">
 
-				<form>
+				<form name="formContact">
 					<div class="form-group col-md-6">
-						<input type="text" placeholder="Ten" class="form-control"/>
+						<input type="text" name="username" ng-model="username" placeholder="Tên" required class="form-control"/>
 					</div>
 					<div class="form-group col-md-6">
-						<input type="text" placeholder="Email" class="form-control"/>
+						<input type="text" name="email" ng-model="email" placeholder="Email" required class="form-control"/>
 					</div>
 					<div class="form-group col-md-12">
-						<input type="text" placeholder="Chu de" class="form-control"/>
+						<input type="text" name="subject" ng-minLength="5" ng-model="subject" placeholder="Chủ đề" required class="form-control"/>
 					</div>
 					<div class="form-group col-md-12">
-						<textarea class="form-control" placeholder="Nhap noi dung" rows="6"></textarea>
+						<textarea required class="form-control" name="content" ng-minLength="10" ng-model="content" placeholder="Nội dung" rows="6"></textarea>
 					</div>
 					<div class="button-group pull-right">
-						<button class="btn btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span> Xoa</button>
-						<button class="btn btn-primary" type="submit"><span class="fa fa-check"></span> Gui</button>
+						<button class="btn btn-danger" type="reset"><span class="glyphicon glyphicon-remove"></span> Xóa</button>
+						<button class="btn btn-primary" type="submit" ng-disabled="formContact.$invalid" ng-click="submit()"><span class="fa fa-check"></span> Gửi</button>
 					</div>
 				</form>					
 
 			</div>
+		</div>
+
+		<div class="alert alert-success" ng-hide="check" ng-click="closeAlert()">
+			<button class="close" ng-click="closeAlert()">
+			  	<span aria-hidden="true">&times;</span>
+			</button>
+			<p>Nội dung của bạn đã được gửi đi.</p>
+		</div>
+
+		<div class="alert alert-danger" ng-hide="checkError" ng-click="closeAlert()">
+			<button class="close" ng-click="closeAlert()">
+			  	<span aria-hidden="true">&times;</span>
+			</button>
+			<p>Đã có lỗi xảy ra, xin lỗi bạn vì sự kiện này.</p>
 		</div>
 	</div>
 
 	<div class="col-md-4">
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<i class="fa fa-info-circle"></i> Thong tin lien he
+				<i class="fa fa-info-circle"></i> Thông tin liên hệ
 			</div>
 			<div class="panel-body">
 				<p>Phone-shop Inc.</p>
-				<p>So 1 Dai Co Viet, Quan Ha Ba Trung</p>
-				<p>Ha Noi, Viet Nam</p>
+				<p>Số 1 Đại Cổ Việt, Quận Hai Bà Trưng</p>
+				<p>Hà Nội, Việt Nam</p>
 				<p>Mobile: +84 167 629 8972</p>
-				<p>Email: giatuyentiensinh@gmail.com</p>
+				<p>Email: hangct11@gmail.com</p>
 			</div>
 		</div>
 
 		<div class="panel panel-warning">
 			<div class="panel-heading">
-				<span class="icon-social-dribbble"></span> Mang xa hoi
+				<span class="icon-social-dribbble"></span> Mạng xã hội
 			</div>
 			<div class="panel-body">
 				<ul class="list-inline text-center h3">

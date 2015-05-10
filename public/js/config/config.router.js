@@ -3,14 +3,9 @@
 var app = angular.module('App', [
 	'ui.router',
 	'ui.load',
-	'App.controller',
+	'ui.bootstrap',
 	'ngCookies'
 ]);
-
-angular.module('App.controller', [])
-	.controller('AppCtrl', ['$scope', function($scope) {
-
-	}]);
 
 app.config([
 			'$stateProvider', '$urlRouterProvider',
@@ -21,10 +16,9 @@ app.config([
 				url: '/main',
 				abstract: true,
 				templateUrl: 'tpl/pages/home.html',
-				controller: 'AppCtrl',
 				resolve: {
 							deps: ['uiLoad', function(uiLoad) {
-								return uiLoad.load(['js/productCtrl.js']);
+								return uiLoad.load(['js/controller/productCtrl.js']);
 							}]
 						}
 			})
@@ -54,8 +48,7 @@ app.config([
 			.state('product', {
 				url: '/product',
 				abstract: true,
-				templateUrl: 'tpl/pages/product-detail.html',
-				controller: 'AppCtrl'
+				templateUrl: 'tpl/pages/product-detail.html'
 			})
 			.state('product.detail', {
 				url: '/detail/:id',
@@ -94,8 +87,7 @@ app.config([
 			.state('cart', {
 				url: '/cart',
 				abstract: true,
-				templateUrl: 'tpl/pages/cart.html',
-				controller: 'AppCtrl'
+				templateUrl: 'tpl/pages/cart.html'
 			})
 			.state('cart.cart', {
 				url: '/cart',
@@ -111,8 +103,7 @@ app.config([
 			.state('contact', {
 				url: '/contact',
 				abstract: true,
-				templateUrl: 'tpl/pages/contact.html',
-				controller: 'AppCtrl'
+				templateUrl: 'tpl/pages/contact.html'
 			})
 			.state('contact.contact', {
 				url: '/contact',

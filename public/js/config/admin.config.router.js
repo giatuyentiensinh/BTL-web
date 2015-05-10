@@ -1,7 +1,8 @@
 'use strict';
 
 var admin = angular.module('admin', [
-	'ui.router'
+	'ui.router',
+	'ui.bootstrap'
 ]);
 
 admin.config([

@@ -7,26 +7,20 @@
 			<div class="panel-body text-center">
 				<a href ng-click="rederDetail(product.id)"><img class="img-thumbnail" ng-src="{{product.image}}" /></a>
 				<h4 class="text-danger">{{product.price | number}} VND</h4>
-				<p>Hang san xuat: {{product.provider}}</p>
-				<a class="btn btn-warning" ng-click="addCart(product.id, product.price)"><i class="fa fa-shopping-cart"></i> Them vao gio</a>
+				<p>Hãng sản xuất: {{product.provider}}</p>
+				<a class="btn btn-warning" ng-click="addCart(product.id)"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
 			</div>
 			<div class="panel-footer">
 				<div class="row text-center">
-					<div class="col-md-6"><a href="#"><i class="fa fa-dot-circle-o"></i> So sanh</a></div>
-					<div class="col-md-6"><a href ng-click="rederDetail(product.id)"><i class="fa fa-eye"></i> Cau hinh</a></div>
+					<div class="col-md-6"><a href="#"><i class="fa fa-dot-circle-o"></i> So sánh</a></div>
+					<div class="col-md-6"><a href ng-click="rederDetail(product.id)"><i class="fa fa-eye"></i> Cấu hình</a></div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<div class="col-md-12 text-center">
-		<ul class="pagination">
-			<li><a href="#">Frist</a></li>
-			<li><a href="#">Previous</a></li>
-			<li><a href="#">1</a></li>
-			<li class="active"><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">Next</a></li>
-			<li><a href="#">Last</a></li>
-		</ul>
+		<pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-change="changed()" items-per-page="itemPerPage"></pagination>
+    	<pre>Trang: {{currentPage}} / {{numPages}}</pre>
 	</div>
 </div>

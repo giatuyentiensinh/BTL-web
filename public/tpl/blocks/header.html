@@ -6,7 +6,7 @@
 				<ul class="list-inline">
 					<li class="h6"><a href="#"><span class="glyphicon glyphicon-phone"></span> +84 167 629 8972</a></li>
 					<li></li>
-					<li class="h6"><a href="#"><span class="glyphicon glyphicon-envelope"></span> 20122726@student.hut.edu.vn</a></li>
+					<li class="h6"><a href="#"><span class="glyphicon glyphicon-envelope"></span> hangct11@gmail.com</a></li>
 				</ul>
 			</div>
 			<div class="col-md-6 text-right">
@@ -43,12 +43,12 @@
 
 					<div class="navbar-collapse collapse pull-right" id="menu">
 						<ul class="navbar-nav nav h6">
-							<li ui-sref-active="active"><a ui-sref="main.home"><i class="fa fa-home"></i> Trang chu</a></li>
-							<li ui-sref-active="active"><a ui-sref="product.all"><i class="glyphicon glyphicon-phone"></i> San pham</a></li>
-							<li ui-sref-active="active"><a ui-sref="cart.cart"><i class="fa fa-shopping-cart"></i> Gio hang</a></li>
-							<li ui-sref-active="active"><a ui-sref="contact.contact"><i class="fa fa-book"></i> Lien he</a></li>
-							<li><a href data-target="#search" data-toggle="modal"><i class="fa fa-search"></i> Tim kiem</a></li>
-							<li><a href data-target="#login" data-toggle="modal"><i class="fa fa-lock"></i> Dang nhap</a></li>
+							<li ui-sref-active="active"><a ui-sref="main.home"><i class="fa fa-home"></i> Trang chủ</a></li>
+							<li ui-sref-active="active"><a ui-sref="product.all"><i class="glyphicon glyphicon-phone"></i> Sản phẩm</a></li>
+							<li ui-sref-active="active"><a ui-sref="cart.cart"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+							<li ui-sref-active="active"><a ui-sref="contact.contact"><i class="fa fa-book"></i> Liên hệ</a></li>
+							<li><a href data-target="#search" data-toggle="modal"><i class="fa fa-search"></i> Tìm kiếm</a></li>
+							<li><a href data-target="#login" data-toggle="modal"><i class="fa fa-lock"></i> Đăng nhập</a></li>
 						</ul>
 					</div>
 				</div>
@@ -64,19 +64,19 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<div class="modal-title h4">Dang nhap <span class="fa fa-unlock-alt"></span></div>
+					<div class="modal-title h4">Đăng nhập <span class="fa fa-unlock-alt"></span></div>
 				</div>
 
 				<form class="form-horizontal" name="formLogin" action="/login" method="post">
 					<div class="modal-body">
 							<div class="form-group">
-								<label class="control-label col-md-3">Ten tai khoan</label>
+								<label class="control-label col-md-3">Tên tài khoản</label>
 								<div class="col-md-8">
 									<input type="text" name="username" required ng-model="username" class="form-control"/>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3">Mat khau</label>
+								<label class="control-label col-md-3">Mật khẩu</label>
 								<div class="col-md-8">
 									<input type="password" name="password" required ng-minlength="6" ng-maxlength="256" ng-model="password" class="form-control"/>
 								</div>
@@ -88,13 +88,13 @@
 							</button>
 							{{messageServer}}
 						</div>
-						{{formLogin.$valid}}
+						<!-- {{formLogin.$valid}}
 						{{formLogin.username.$valid}}
-						{{formLogin.password.$valid}}
+						{{formLogin.password.$valid}} -->
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-default" data-dismiss="modal" type="reset"><span class="glyphicon glyphicon-remove-sign"></span> Huy bo</button>
-						<button class="btn btn-primary" ng-disabled="formLogin.$invalid" ng-click="login()"><span class="glyphicon glyphicon-check"></span> Dang nhap</button>
+						<button class="btn btn-default" data-dismiss="modal" type="reset"><span class="glyphicon glyphicon-remove-sign"></span> Hủy bỏ</button>
+						<button class="btn btn-primary" ng-disabled="formLogin.$invalid" ng-click="login()"><span class="glyphicon glyphicon-check"></span> Đăng nhập</button>
 					</div>
 				</form>
 			</div>
@@ -106,18 +106,18 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<div class="modal-title h4"><span class="fa fa-search-plus"></span> Tim kiem</div>
+					<div class="modal-title h4"><span class="fa fa-search-plus"></span> Tìm kiếm</div>
 				</div>
 				<div class="modal-body">
 					<form class="form-vertical">
 						<div class="form-group">
-							<label class="control-label">Nhap thong tin tim kiem</label>
+							<label class="control-label">Nhập thông tin tìm kiếm</label>
 							<input type="text" class="form-control"/>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+					<button class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Hủy bỏ</button>
 					<button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
 				</div>
 			</div>

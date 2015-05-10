@@ -4,27 +4,31 @@
 
 			<table class="table table-hover table-bordered">
 				<thead class="h4 bg-info">
-					<td><span class="fa fa-list"></span> Ma san pham</td>
-					<td><span class="glyphicon glyphicon-phone"></span> Ten</td>
-					<td><span class="fa fa-usd"></span> Gia</td>
-					<td><span class="fa fa-institution"></span> Nha cung cap</td>
+					<td><span class="fa fa-list"></span> Mã sản phẩm</td>
+					<td><span class="glyphicon glyphicon-phone"></span> Tên sản phẩm</td>
+					<td><span class="fa fa-usd"></span> Giá</td>
+					<td><span class="fa fa-institution"></span> Nhà cung cấp</td>
 					<td></td>
 				</thead>
 				<tbody>
 					<tr ng-repeat="phone in phones">
 						<td>{{phone.id}}</td>
 						<td>{{phone.name}}</td>
-						<td>{{phone.price}}</td>
+						<td>{{phone.price | number}} VND</td>
 						<td>{{phone.provider}}</td>
 						<td>
-							<p class="btn btn-primary"><span class="fa fa-eraser"></span> Sua</p>
-							<p class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Xoa</p>
+							<p class="btn btn-primary"><span class="fa fa-eraser"></span> Sửa</p>
+							<p class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Xóa</p>
 						</td>
 					</tr>
 					
 				</tbody>
 			</table>
 		</div>
-		<p class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Them san pham moi</p>
+		<p class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm sản phẩm mới</p>
+
+		<div class="col-md-12 text-center">
+		<pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" ng-change="changed()" items-per-page="itemPerPage"></pagination>
+	</div>
 	</div>
 </div>

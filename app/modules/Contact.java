@@ -1,7 +1,5 @@
 package modules;
 
-import java.util.Date;
-
 import org.mongojack.DBQuery;
 import org.mongojack.Id;
 import org.mongojack.JacksonDBCollection;
@@ -29,26 +27,30 @@ public class Contact {
 	@Email
 	@JsonProperty("email")
 	private String email;
+	@JsonProperty("subject")
+	@Required
+	private String subject;
 	@Required
 	@JsonProperty("content")
 	private String content;
-	@Required
-	@JsonProperty("time")
-	private Date time;
 
 	@JsonCreator
 	public Contact(@Id String id, @JsonProperty("name") String name,
 			@JsonProperty("email") String email,
-			@JsonProperty("content") String content,
-			@JsonProperty("time") Date time) {
+			@JsonProperty("subject") String subject,
+			@JsonProperty("content") String content) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.subject = subject;
 		this.content = content;
-		this.time = time;
 	}
 
-	public Contact findByName(String name) {
+	public void save() {
+		coll.save(this);
+	}
+	
+	public static Contact findByName(String name) {
 		return coll.findOne(DBQuery.is("name", name));
 	}
 }

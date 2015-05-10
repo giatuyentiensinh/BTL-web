@@ -69,6 +69,16 @@ public class Phone {
 		return null;
 	}
 
+	public static List<Phone> findOffsetAndCount(String offset, String number) {
+		int count = Integer.parseInt(number);
+		int skip = count * Integer.parseInt(offset);
+		return coll.find().limit(count).skip(skip).toArray();
+	}
+	
+	public static long count() {
+		return coll.count();
+	}
+
 	public static List<Phone> findAll() {
 		return coll.find().toArray();
 	}
