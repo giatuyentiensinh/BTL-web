@@ -6,14 +6,14 @@
 			</div>
 			<div class="panel-body text-center">
 				<a href ng-click="rederDetail(product.id)"><img class="img-thumbnail" ng-src="{{product.image}}" /></a>
-				<h4 class="text-danger">{{product.price | number}} VND</h4>
+				<h4 class="text-danger">{{product.price | number}} VNĐ</h4>
 				<p>Hãng sản xuất: {{product.provider}}</p>
 				<a class="btn btn-warning" ng-click="addCart(product.id)"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
 			</div>
 			<div class="panel-footer">
 				<div class="row text-center">
 					<div class="col-md-6"><a href="#"><i class="fa fa-dot-circle-o"></i> So sánh</a></div>
-					<div class="col-md-6"><a href ng-click="rederDetail(product.id)"><i class="fa fa-eye"></i> Cấu hình</a></div>
+					<div class="col-md-6"><a href ng-click="rederDetail(product._id)"><i class="fa fa-eye"></i> Cấu hình</a></div>
 				</div>
 			</div>
 		</div>

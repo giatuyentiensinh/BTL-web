@@ -30,12 +30,12 @@
 								<tr ng-repeat="cart in carts">
 									<td>{{cart.name}}</td>
 									<td ng-init="total.quantity = total.quantity + cart.quantity">{{cart.quantity}}</td>
-									<td><span ng-bind="cart.quantity * cart.price | number"></span> VND</td>
+									<td><span ng-bind="cart.quantity * cart.price | number"></span> VNĐ</td>
 								</tr>
 								<tr class="danger">
 									<td>Tổng</td>
 									<td>{{count}}</td>
-									<td>{{totalCost() | number}} VND</td>
+									<td>{{totalCost() | number}} VNĐ</td>
 								</tr>
 							</tbody>
 						</table>
@@ -135,11 +135,11 @@
 									<p class="h5">{{cart.name}}</p>
 									<p>ID: {{cart.id}}</p>
 								</td>
-								<td>{{cart.price | number}} VND</td>
+								<td>{{cart.price | number}} VNĐ</td>
 								<td>
 									<input type="number" ng-model="cart.quantity" min="1" ng-change="increPhone(cart.id, cart.quantity)"/>
 								</td>
-								<td class="text-danger h5"><span ng-bind="cart.quantity * cart.price | number"></span> VND</td>
+								<td class="text-danger h5"><span ng-bind="cart.quantity * cart.price | number"></span> VNĐ</td>
 								<td><span class="btn btn-danger fa fa-trash-o" ng-click="itemDetele(cart.id)"></span></td>
 							</tr>		
 						</tbody>

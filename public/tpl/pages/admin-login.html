@@ -1,0 +1,31 @@
+<div class="container-fluid">
+	<form class="form-horizontal" name="formLogin">
+		<div class="form-group">
+			<label class="control-label col-md-3">Tên tài khoản</label>
+			<div class="col-md-5">
+				<input type="text" name="username" required ng-model="username" class="form-control"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">Mật khẩu</label>
+			<div class="col-md-5">
+				<input type="password" name="password" required ng-minlength="6" ng-maxlength="256" ng-model="password" class="form-control"/>
+			</div>
+		</div>
+
+		<div ng-show='messageServer.length > 0' class="alert alert-danger fade in" ng-click="messageServer=''">
+			<button class="close" aria-label="Close" ng-click="messageServer=''">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			{{messageServer}}
+		</div>
+		<!-- {{formLogin.$valid}}
+		{{formLogin.username.$valid}}
+		{{formLogin.password.$valid}} -->
+		<div class="form-group">
+			<button class="btn btn-default col-md-offset-4" type="reset"><span class="glyphicon glyphicon-remove-sign"></span> Hủy bỏ</button>
+			<button class="btn btn-primary" ng-disabled="formLogin.$invalid" ng-click="login()"><span class="glyphicon glyphicon-check"></span> Đăng nhập</button>
+
+		</div>
+	</form>
+</div>

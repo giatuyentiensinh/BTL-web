@@ -3,39 +3,153 @@
 		<div class="col-md-6 well">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<div class="panel-title">Hóa đơn khách hàng <span class="badge pull-right">{{count}}</span></div>
+					<div class="panel-title"><span class="fa fa-list-alt"></span> Hóa đơn khách hàng <span class="badge pull-right">{{count}}</span></div>
 				</div>
 				<div class="panel-body">
 					<div class="list-group">
-						<a class="list-group-item">
-							<h4 class="list-group-item-heading">Ten</h4>							
+						<a href class="list-group-item" ng-repeat="bill in bills" ng-click="showBillId(bill)">
+							<h4 class="list-group-item-heading"><span class="icon-user"></span> Tên khách hàng: <em>{{bill.username}}</em></h4>
 							<div class="list-group-item-text">
-								<h5>Ma hoa don</h5>
-								<p>So luong san pham</p>
+								<h5><span class="fa fa-chain"></span> Mã hóa đơn: {{bill._id}}</h5>
+								<p>Số lượng sản phẩm: {{bill.item.length}}</p>
 							</div>
 						</a>
 					</div>
-					<div class="list-group">
-						<a class="list-group-item">
-							<h4 class="list-group-item-heading">Ten</h4>							
-							<div class="list-group-item-text">
-								<h5>Ma hoa don</h5>
-								<p>So luong san pham</p>
-							</div>
-						</a>
-					</div>
+					
 				</div>
 			</div>			
 		</div>
 		<div class="col-md-offset-1 col-md-5 well">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<div class="panel-title">Góp ý của khách hàng</div>
+					<div class="panel-title"><span class="icon-user-following"></span> Góp ý của khách hàng <span class="badge pull-right">{{countComment}}</span></div>
 				</div>
 				<div class="panel-body">
-					
+					<div class="list-group">
+						<a href class="list-group-item" ng-repeat="comment in comments" ng-click="showCommentId(comment)">
+							<h4 class="list-group-item-heading"><span class="icon-user"></span> Khách hàng {{$index + 1}}</h4>
+							<div class="list-group-item-text">
+								<span class="icon-link"></span> {{comment.subject}}
+							</div>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script type="text/ng-template" id="showBillId.html">
+	<div class="modal-header">
+		<h3 class="modal-title">
+			<span class="fa fa-database"></span> Thông tin hóa đơn
+			<button type="button" class="close" aria-label="Close" ng-click="ok()"><span aria-hidden="true">&times;</span></button>
+		</h3>
+	</div>
+	<div class="modal-body">
+		<h4><span class="fa fa-github-alt"></span> Thông tin khách hàng</h4>
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-md-2 control-label">Tên khách hàng</label>
+				<div class="col-md-10">
+					<input class="form-control" ng-model="username" ng-disabled="true"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Số điện thoại</label>
+				<div class="col-md-10">
+					<input class="form-control" ng-model="phonenumber" ng-disabled="true"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Email</label>
+				<div class="col-md-10">
+					<input class="form-control" ng-model="email" ng-disabled="true"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Địa chỉ</label>
+				<div class="col-md-10">
+					<input class="form-control" ng-model="address" ng-disabled="true"/>
+				</div>
+			</div>				
+		</form>
+
+		<h4><span class="fa fa-folder-open"></span> Thông tin sản phẩm</h4>
+
+		<form class="form-horizontal" ng-repeat="item in items">
+			<div class="bg-warning" style="padding-left: 10px;"><span class="fa fa-reorder" style="padding-right: 10px;"></span> Sản phẩm thứ {{$index + 1}}</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Tên điện thoại</label>
+				<div class="col-md-10">
+					<input class="form-control" ng-model="item.name" ng-disabled="true"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Giá tiền</label>
+				<div class="col-md-10">
+					<input class="form-control" value="{{item.price | number}} VNĐ" ng-disabled="true"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Nhà cung cấp</label>
+				<div class="col-md-10">
+					<input class="form-control" ng-model="item.provider" ng-disabled="true"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Số lượng</label>
+				<div class="col-md-10">
+					<input class="form-control" ng-model="item.quantity" ng-disabled="true"/>
+				</div>
+			</div>				
+		</form>
+
+	</div>
+
+	<div class="modal-footer">
+		<p class="btn btn-primary" ng-click="ok()"><span class="fa fa-check"></span> Ok</p>
+	</div>
+	
+</script>
+
+<script type="text/ng-template" id="showCommentId.html">
+	<div class="modal-header">
+		<h3 class="modal-title">
+			<span class="fa fa-comments"></span> Góp ý
+			<button type="button" class="close" aria-label="Close" ng-click="ok()"><span aria-hidden="true">&times;</span></button>
+		</h3>
+	</div>
+	<div class="modal-body">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-md-3 control-label">Tên khách hàng</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="name" ng-disabled="true"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label">Email</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="email" ng-disabled="true"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label">Chủ đề</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="subject" ng-disabled="true"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label">Nội dung</label>
+				<div class="col-md-9">
+					<textarea class="form-control" ng-model="content" ng-disabled="true"> </textarea>
+				</div>
+			</div>				
+		</form>
+	</div>
+
+	<div class="modal-footer">
+		<p class="btn btn-primary" ng-click="ok()"><span class="fa fa-check"></span> Ok</p>
+	</div>
+</script>

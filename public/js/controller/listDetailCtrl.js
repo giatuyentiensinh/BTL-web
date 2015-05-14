@@ -14,7 +14,7 @@ app.controller('listDetailCtrl', ['$scope', '$state', '$stateParams', 'PhoneServ
 		var check = true;		
 		var cookies = document.cookie.split('; ');
 
-		console.log(document.cookie);
+		// console.log(document.cookie);
 
 		for(var i = 0; i < cookies.length; i++) {
 			var cookie = cookies[i].split('=');

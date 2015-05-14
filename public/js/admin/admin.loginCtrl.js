@@ -1,4 +1,4 @@
-app.controller('LoginCtrl', ['$scope', '$http', function($scope, $http) {
+admin.controller('LoginCtrl', ['$scope', '$http', function($scope, $http) {
 
 	$scope.login = function() {
 		$scope.messageServer = '';

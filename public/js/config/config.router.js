@@ -39,10 +39,10 @@ app.config([
 					},
 					'contain': {
 						templateUrl: 'tpl/pages/products.html'
-					},
-					'recommend': {
-						templateUrl: 'tpl/recommend.html'
 					}
+					// 'recommend': {
+					// 	templateUrl: 'tpl/recommend.html'
+					// }
 				}
 			})
 			.state('product', {

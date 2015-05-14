@@ -1,5 +1,7 @@
 package modules;
 
+import java.util.List;
+
 import org.mongojack.DBQuery;
 import org.mongojack.Id;
 import org.mongojack.JacksonDBCollection;
@@ -52,5 +54,13 @@ public class Contact {
 	
 	public static Contact findByName(String name) {
 		return coll.findOne(DBQuery.is("name", name));
+	}
+	
+	public static List<Contact> readContactAll() {
+		return coll.find().toArray();
+	}
+	
+	public String getId() {
+		return id;
 	}
 }

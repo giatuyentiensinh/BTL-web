@@ -7,14 +7,22 @@ GET		/		controllers.Assets.at(path="/public", file="index.html")
 
 GET		/admin		controllers.Assets.at(path="/public", file="admin-index.html")
 
+# client
 GET		/store/phone	controllers.Application.phone()
 GET		/store/phone/:id controllers.Application.phoneId(id: String)
-
 GET		/store/category controllers.Application.category()
+GET		/store/cart		controllers.Application.readCart()
 
-POST	/addCart	controllers.Application.addCartSession()
-GET		/store/readListCart	 controllers.Application.readListCart()
-DELETE	/store/readListCart	 controllers.Application.deleteCart()
+POST	/comments		controllers.Application.contactByClient()
+POST	/buyphone		controllers.Application.buyItem()
+
+
+
+# admin
+POST	/addCart	controllers.Admin.addCartSession()
+GET		/store/readListCart	 controllers.Admin.readListCart()
+DELETE	/store/readListCart	 controllers.Admin.deleteCart()
+GET		/store/readBill		controllers.Admin.readBill()
 
 
 POST	/login		controllers.Authentication.login()

@@ -22,7 +22,49 @@ admin.factory('AdminService', ['$http', function($http) {
 		});
 	};
 
-	var bill = function(id) {
+	var deletePhone = function(id) {
+		return $http({
+			method: 'DELETE',
+			url: '/store/phone/' + id,
+			headers: {
+				xsrfHeaderName: 'sercurity'
+			}
+		})
+	};
+
+	var updatePhone = function(id, phone) {
+		// console.log('Update phone on service');
+		// console.log(phone.price);
+		// console.log(id);		
+		return $http({
+			method: 'PUT',
+			url: '/store/phone/' + id,
+			headers: {
+				xsrfHeaderName: 'sercurity'
+			},
+			data: {
+				phone: phone
+			}
+		})
+	};
+
+	var createPhone = function(phone) {
+		// console.log('Create phone on service');
+		// console.log(phone);
+		// console.log('end');
+		return $http({
+			method: 'POST',
+			url: '/store/phone',
+			headers: {
+				xsrfHeaderName: 'sercurity'
+			},
+			data: {
+				phone: phone
+			}
+		});
+	};
+
+	var bill = function() {
 		return $http({
 			method: 'GET',
 			url: '/store/readBill',
@@ -30,8 +72,17 @@ admin.factory('AdminService', ['$http', function($http) {
 				xsrfHeaderName: 'sercurity'
 			}
 		});
-	}
+	};
 
+	var readComment = function() {
+		return $http({
+			method: 'GET',
+			url: '/store/readComment',
+			headers: {
+				xsrfHeaderName: 'sercurity'
+			}
+		});
+	};
 
 	return {
 		resultPage: function(index, number) {
@@ -42,6 +93,21 @@ admin.factory('AdminService', ['$http', function($http) {
 		},
 		phoneId: function(id) {
 			return findPhoneId(id);
+		},
+		deletePhone: function(id) {
+			return deletePhone(id);
+		},
+		updatePhone: function(id, phone) {
+			return updatePhone(id, phone);
+		},
+		createPhone: function(phone) {
+			return createPhone(phone);
+		},
+		readBill: function() {
+			return bill();
+		},
+		readComment: function() {
+			return readComment();
 		}
 	}
 

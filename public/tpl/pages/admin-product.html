@@ -17,18 +17,128 @@
 						<td>{{phone.price | number}} VND</td>
 						<td>{{phone.provider}}</td>
 						<td>
-							<p class="btn btn-primary"><span class="fa fa-eraser"></span> Sửa</p>
-							<p class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Xóa</p>
+							<p class="btn btn-primary" ng-click="changePhone(phone.id, phone)"><span class="fa fa-pencil"></span> Sửa</p>
+							<p class="btn btn-danger" ng-click="deletePhone(phone.id)"><span class="glyphicon glyphicon-remove"></span> Xóa</p>
 						</td>
 					</tr>
 					
 				</tbody>
 			</table>
 		</div>
-		<p class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Thêm sản phẩm mới</p>
+		<p class="btn btn-primary" ng-click="addPhone()"><span class="glyphicon glyphicon-plus"></span> Thêm sản phẩm mới</p>
 
 		<div class="col-md-12 text-center">
-		<pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" ng-change="changed()" items-per-page="itemPerPage"></pagination>
+		<pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" ng-change="changePagination()" items-per-page="itemPerPage"></pagination>
 	</div>
 	</div>
 </div>
+
+
+<!-- change item -->
+<script type="text/ng-template" id="changePhoneId.html">
+	<div class="modal-header">
+		<h3 class="modal-title">
+			<span class="icon-settings"></span> {{title}}
+			<button type="button" class="close" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+		</h3>
+	</div>
+	<div class="modal-body">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="col-md-2 control-label">Tên điện thoại</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="name" placeholder="Nhập tên của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Kích thước</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="size" placeholder="Nhập kích thước của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Trọng lượng</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="weight" placeholder="Nhập trọng lượng của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Giá tiền</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="price" placeholder="Nhập giá tiền của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Đường dẫn ảnh</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="image" placeholder="Nhập dường dẫn ảnh của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Nhà cung cấp</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="provider" placeholder="Nhập nhà cung cấp của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Hệ điều hành</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="os" placeholder="Nhập hệ điều hành của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Màn hình</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="display" placeholder="Nhập màn hình của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">CPU</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="cpu" placeholder="Nhập CPU của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">RAM</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="ram" placeholder="Nhập RAM của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Pin</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="pin" placeholder="Nhập pin của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Camera trước</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="front" placeholder="Nhập camera trước của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Camera sau</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="back" placeholder="Nhập camera sau của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Wifi</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="wifi" placeholder="Nhập wifi của điện thoại"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Bluetooth</label>
+				<div class="col-md-9">
+					<input class="form-control" ng-model="bluetooth" placeholder="Nhập bluetooth của điện thoại"/>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="modal-footer">
+		<p class="btn btn-danger" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span> Hủy bỏ</p>
+		<p class="btn btn-success" ng-click="ok()"><span class="fa fa-check"></span> Thay đổi</p>
+	</div>
+</script>

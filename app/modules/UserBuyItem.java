@@ -17,6 +17,7 @@ public class UserBuyItem {
 					UserBuyItem.class, String.class);
 
 	@Id
+	@JsonProperty("_id")
 	private String id;
 	@JsonProperty("username")
 	private String username;
@@ -30,13 +31,14 @@ public class UserBuyItem {
 	private List<Item> items;
 
 	@JsonCreator
-	public UserBuyItem(@Id String id,
+	public UserBuyItem(@Id @JsonProperty("_id") String id,
 			@JsonProperty("username") String username,
 			@JsonProperty("phonenumber") String phonenumber,
 			@JsonProperty("email") String email,
 			@JsonProperty("address") String address,
 			@JsonProperty("item") List<Item> items) {
 		super();
+		this.id = id;
 		this.username = username;
 		this.phonenumber = phonenumber;
 		this.email = email;
@@ -44,6 +46,10 @@ public class UserBuyItem {
 		this.items = items;
 	}
 
+	public static List<UserBuyItem> readBill() {
+		return coll.find().toArray();
+	}
+	
 	public void save() {
 		coll.save(this);
 	}

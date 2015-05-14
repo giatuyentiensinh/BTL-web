@@ -1,20 +1,17 @@
 <!-- Category -->
-<div class="panel-group">
+<div class="panel-group" ng-controller="leftnavCtrl">
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div data-target="#phone1" data-toggle="collapse">
-				<h4 class="panel-title">Phone 1<a class="badge pull-right"><span class="fa fa-plus-circle"></span></a></h4>
+				<h4 class="panel-title">Điện thoại phổ thông<a class="badge pull-right">{{phone1.length}}</a></h4>
 			</div>
 			<div id="phone1" class="panel-collapse collapse">
 				<div class="panel-body">
 					<ul class="list-unstyled">
-						<li>.</li>
-						<li>.</li>
-						<li>.</li>
-						<li>.</li>
-						<li>.</li>
+						<li ng-repeat="phone in phone1"><span class="fa fa-indent"></span> <a href ng-click="rederDetail(phone.id)">{{phone.name}}</a></li>						
 					</ul>
+					<p class="h4" ng-show="phone1.length == 0">Không có hàng <span class="fa fa-frown-o"></span></p>
 				</div>
 			</div>
 		</div>
@@ -23,17 +20,14 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div data-target="#phone2" data-toggle="collapse">
-				<h4 class="panel-title">Phone 2<a class="badge pull-right"><span class="fa fa-plus-circle"></span></a></h4>
+				<h4 class="panel-title">Điện thoại tầm trung<a class="badge pull-right">{{phone2.length}}</a></h4>
 			</div>
 			<div id="phone2" class="panel-collapse collapse">
 				<div class="panel-body">
 					<ul class="list-unstyled">
-						<li>.</li>
-						<li>.</li>
-						<li>.</li>
-						<li>.</li>
-						<li>.</li>
+						<li ng-repeat="phone in phone2"><span class="fa fa-indent"></span> <a href ng-click="rederDetail(phone.id)">{{phone.name}}</a></li>
 					</ul>
+					<p class="h4" ng-show="phone2.length == 0">Không có hàng <span class="fa fa-frown-o"></span></p>
 				</div>
 			</div>
 		</div>
@@ -42,25 +36,22 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div data-target="#phone3" data-toggle="collapse">
-				<h4 class="panel-title">Phone 3<a class="badge pull-right"><span class="fa fa-plus-circle"></span></a></h4>
+				<h4 class="panel-title">Điện thoại cao cấp<a class="badge pull-right">{{phone3.length}}</a></h4>
 			</div>
 			<div id="phone3" class="panel-collapse collapse">
 				<div class="panel-body">
 					<ul class="list-unstyled">
-						<li>.</li>
-						<li>.</li>
-						<li>.</li>
-						<li>.</li>
-						<li>.</li>
+						<li ng-repeat="phone in phone3"><span class="fa fa-indent"></span> <a href ng-click="rederDetail(phone.id)">{{phone.name}}</a></li>
 					</ul>
+					<p class="h4" ng-show="phone3.length == 0">Không có hàng <span class="fa fa-frown-o"></span></p>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<ul class="nav nav-pills nav-stacked" ng-controller="leftnavCtrl">
+	<ul class="nav nav-pills nav-stacked">
 		<li ng-repeat="provider in categories">
-			<a href="#"><span class="pull-right">({{$index + 1}})</span>{{provider}}</a>
+			<a href ng-click="rederDetail(phone.id)"="#"><span class="pull-right">({{$index + 1}})</span>{{provider}}</a>
 		</li>		
 	</ul>
 </div>

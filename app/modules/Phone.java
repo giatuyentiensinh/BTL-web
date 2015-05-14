@@ -2,7 +2,10 @@ package modules;
 
 import java.util.List;
 
-import org.bson.types.ObjectId;
+import modules.phone.Configuration;
+
+import org.mongojack.DBQuery;
+import org.mongojack.DBQuery.Query;
 import org.mongojack.Id;
 import org.mongojack.JacksonDBCollection;
 import org.mongojack.MongoCollection;
@@ -18,7 +21,7 @@ public class Phone {
 					String.class);
 
 	@Id
-	private ObjectId id;
+	private String id;
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("size")
@@ -41,7 +44,7 @@ public class Phone {
 	}
 
 	@JsonCreator
-	public Phone(@Id ObjectId id, @JsonProperty("name") String name,
+	public Phone(@Id String id, @JsonProperty("name") String name,
 			@JsonProperty("size") String size,
 			@JsonProperty("weight") String weight,
 			@JsonProperty("price") Double price,
@@ -61,12 +64,22 @@ public class Phone {
 		this.configuration = configuration;
 	}
 
+	// Access Edit and change
+	public static void deletePhone(String id) {
+		coll.removeById(id);
+	}
+
+	public static void updatePhone(String id, Phone phone) {
+		coll.updateById(id, phone);
+	}
+
+	public static void savePhone(Phone phone) {
+		coll.save(phone);
+	}
+
+	// Access read
 	public static Phone findbyId(String id) {
-		List<Phone> all = findAll();
-		for (Phone phone : all)
-			if (id.equals(phone.id.toString()))
-				return phone;
-		return null;
+		return coll.findOneById(id);
 	}
 
 	public static List<Phone> findOffsetAndCount(String offset, String number) {
@@ -74,7 +87,7 @@ public class Phone {
 		int skip = count * Integer.parseInt(offset);
 		return coll.find().limit(count).skip(skip).toArray();
 	}
-	
+
 	public static long count() {
 		return coll.count();
 	}
@@ -88,69 +101,29 @@ public class Phone {
 		return coll.distinct("provider");
 	}
 
+	public static List<Phone> findCost(String lessthan, String greaterthan) {
+		double lt = Double.parseDouble(lessthan);
+		double gt = Double.parseDouble(greaterthan);
+
+		// System.out.println(lt);
+		// System.out.println(gt);
+
+		if (lt == 0) {
+			Query query = DBQuery.greaterThan("price", gt);
+			return coll.find(query).toArray();
+		}
+		if (gt == 0) {
+			Query query = DBQuery.lessThan("price", lt);
+			return coll.find(query).toArray();
+		}
+
+		Query greate = DBQuery.greaterThanEquals("price", lt);
+		Query less = DBQuery.lessThanEquals("price", gt);
+
+		return coll.find(DBQuery.and(greate, less)).toArray();
+	}
+
 	public String getId() {
 		return id.toString();
-	}
-}
-
-class Configuration {
-	@JsonProperty("OS")
-	private String os;
-	@JsonProperty("display")
-	private String display;
-	@JsonProperty("cpu")
-	private String cpu;
-	@JsonProperty("ram")
-	private String ram;
-	@JsonProperty("pin")
-	private String pin;
-	@JsonProperty("network")
-	private Network network;
-	@JsonProperty("camera")
-	private Camera camera;
-
-	@JsonCreator
-	public Configuration(@JsonProperty("OS") String os,
-			@JsonProperty("display") String display,
-			@JsonProperty("cpu") String cpu, @JsonProperty("ram") String ram,
-			@JsonProperty("pin") String pin,
-			@JsonProperty("netword") Network network,
-			@JsonProperty("camera") Camera camera) {
-		super();
-		this.os = os;
-		this.display = display;
-		this.cpu = cpu;
-		this.ram = ram;
-		this.pin = pin;
-		this.network = network;
-		this.camera = camera;
-	}
-}
-
-class Network {
-	@JsonProperty("wifi")
-	private String wifi;
-	@JsonProperty("bluetooth")
-	private String bluetooth;
-
-	@JsonCreator
-	public Network(@JsonProperty("wifi") String wifi,
-			@JsonProperty("bluetooth") String bluetooth) {
-		this.wifi = wifi;
-		this.bluetooth = bluetooth;
-	}
-}
-
-class Camera {
-	@JsonProperty("front")
-	private String front;
-	@JsonProperty("back")
-	private String back;
-
-	@JsonCreator
-	public Camera(@JsonProperty("front") String front,
-			@JsonProperty("back") String back) {
-		this.front = front;
-		this.back = back;
 	}
 }

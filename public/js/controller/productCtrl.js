@@ -1,7 +1,7 @@
 app.controller('productCtrl', ['$scope', '$state', '$cookieStore', 'PhoneService',
                                function($scope, $state, $cookieStore, PhoneService) {
 	
-	$scope.itemPerPage = 3;
+	$scope.itemPerPage = 6;
 	$scope.currentPage = 1;
 
 	PhoneService.resultPage(0, 0)
@@ -12,7 +12,8 @@ app.controller('productCtrl', ['$scope', '$state', '$cookieStore', 'PhoneService
 			console.log("Server error");
 		});
 
-	$scope.maxSize = $scope.totalItems / $scope.itemPerPage;
+	// $scope.maxSize = $scope.totalItems / $scope.itemPerPage;
+	$scope.maxSize = 3;
 
 	PhoneService.resultPage(0, $scope.itemPerPage)
 		.success(function(data, status, headers, config) {
@@ -24,6 +25,8 @@ app.controller('productCtrl', ['$scope', '$state', '$cookieStore', 'PhoneService
 		});
 	
 	$scope.rederDetail = function(product_id) {
+		// console.log(product_id);
+		
 		$state.go('product.detail', {id: product_id});
 	}
 	
@@ -31,7 +34,7 @@ app.controller('productCtrl', ['$scope', '$state', '$cookieStore', 'PhoneService
 		var check = true;		
 		var cookies = document.cookie.split('; ');
 
-		console.log(document.cookie);
+		// console.log(document.cookie);
 
 		for(var i = 0; i < cookies.length; i++) {
 			var cookie = cookies[i].split('=');

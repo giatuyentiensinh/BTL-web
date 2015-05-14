@@ -22,13 +22,37 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class Application extends Controller {
 
-	public static Result index() {
-		return ok();
-	}
-
 	/*Client*/
+	
+	// file category
 	public static Result category() {
+		Map<String, String[]> headers = request().headers();
+		try {
+			if (headers.get("xsrfHeaderName")[0] == null
+					|| !"sercurity".equals(headers.get("xsrfHeaderName")[0]))
+				return badRequest("Hacker");
+		} catch (Exception e) {
+			Logger.error(e.toString());
+			return badRequest("Hacker");
+		}
 		return ok(Json.toJson(Phone.findCategory()));
+	}
+	
+	public static Result findCost() {
+		Map<String, String[]> headers = request().headers();
+		try {
+			if (headers.get("xsrfHeaderName")[0] == null
+					|| !"sercurity".equals(headers.get("xsrfHeaderName")[0]))
+				return badRequest("Hacker");
+		} catch (Exception e) {
+			Logger.error(e.toString());
+			return badRequest("Hacker");
+		}
+		
+		String lt = headers.get("lessthan")[0];
+		String gt = headers.get("greaterthan")[0];
+		
+		return ok(Json.toJson(Phone.findCost(lt, gt)));
 	}
 
 	// contact

@@ -8,9 +8,14 @@ var admin = angular.module('admin', [
 admin.config([
 			'$stateProvider', '$urlRouterProvider',
 	function($stateProvider,   $urlRouterProvider) {
-		$urlRouterProvider.otherwise('/product');
+		$urlRouterProvider.otherwise('/login');
 
 		$stateProvider
+			.state('login', {
+				url: '/login',
+				templateUrl: 'tpl/pages/admin-login.html',
+				controller: 'LoginCtrl'
+			})
 			.state('product', {
 				url: '/product',
 				templateUrl: 'tpl/pages/admin-product.html',
