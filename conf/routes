@@ -1,7 +1,3 @@
-# Routes
-# This file defines all application routes (Higher priority routes first)
-# ~~~~
-
 # Home page
 GET		/		controllers.Assets.at(path="/public", file="index.html")
 
@@ -20,12 +16,17 @@ POST	/buyphone		controllers.Application.buyItem()
 
 # admin
 POST	/login		controllers.Authentication.login()
-DELETE	/store/phone/:id	controllers.Admin.deletePhone(id: String)
-PUT		/store/phone/:id	controllers.Admin.updatePhone(id: String)
-POST	/store/phone		controllers.Admin.createPhone()
+GET		/logout		controllers.Authentication.logout()
+POST	/account/changename		controllers.Authentication.changeName()
+POST	/account/changepass		controllers.Authentication.changePass()
 
-GET		/store/readBill		controllers.Admin.readBill()
-GET		/store/readComment	controllers.Admin.readComment()
+
+DELETE	/store/phone/:id	controllers.AdminController.deletePhone(id: String)
+PUT		/store/phone/:id	controllers.AdminController.updatePhone(id: String)
+POST	/store/phone		controllers.AdminController.createPhone()
+
+GET		/store/readBill		controllers.AdminController.readBill()
+GET		/store/readComment	controllers.AdminController.readComment()
 
 # Map statics from the /public folder to the /assets URL path
 GET		/css/*file		controllers.Assets.at(path="/public/css", file)

@@ -1,5 +1,5 @@
-admin.controller('AdminProductCtrl', ['$scope', '$state', '$modal','AdminService',	
-	function($scope, $state, $modal, AdminService) {
+admin.controller('AdminProductCtrl', ['$scope', '$modal','AdminService',	
+	function($scope, $modal, AdminService) {
 
 		$scope.itemPerPage = 6;
 		$scope.currentPage = 1;
@@ -9,7 +9,12 @@ admin.controller('AdminProductCtrl', ['$scope', '$state', '$modal','AdminService
 				$scope.totalItems = data;			
 			})
 			.error(function(data, status, headers, config) {
-				console.log("Server error");
+				if(data=='not login') {
+					console.log("Hacker");
+					AdminService.redirect('login');
+				} else {
+					console.log("Server error");
+				}
 			});
 
 		AdminService.resultPage(0, $scope.itemPerPage)
@@ -18,8 +23,13 @@ admin.controller('AdminProductCtrl', ['$scope', '$state', '$modal','AdminService
 				console.log("Load Success");
 			})
 			.error(function(data, status, headers, config) {
-				console.log("Error to Server");
-				console.log(data);
+				if(data=='not login') {
+					console.log("Hacker");
+					AdminService.redirect('login');
+				} else {
+					console.log("Error to Server");
+					console.log(data);
+				}
 
 			});
 
@@ -28,7 +38,12 @@ admin.controller('AdminProductCtrl', ['$scope', '$state', '$modal','AdminService
 				.success(function(data, status, headers, config) {
 					$scope.phones = data;
 				}).error(function(data, status, headers, config) {
-					console.log("server error");
+					if(data=='not login') {
+						console.log("Hacker");
+						AdminService.redirect('login');
+					} else {
+						console.log("server error");
+					}
 				});
 		}
 
@@ -37,7 +52,12 @@ admin.controller('AdminProductCtrl', ['$scope', '$state', '$modal','AdminService
 				.success(function(data, status, headers, config) {
 					console.log("Delete success");
 				}).error(function(data, status, headers, config) {
-					console.log("server error");
+					if(data=='not login') {
+						console.log("Hacker");
+						AdminService.redirect('login');
+					} else {
+						console.log("server error");
+					}
 				});
 			$state.go($state.current, {}, {reload: true});
 		}
@@ -67,7 +87,12 @@ admin.controller('AdminProductCtrl', ['$scope', '$state', '$modal','AdminService
 						console.log(data);
 						$state.go($state.current, {}, {reload: true});
 					}).error(function(data, status, headers, config) {
-						console.log("server error");
+						if(data=='not login') {
+							console.log("Hacker");
+							AdminService.redirect('login');
+						} else {
+							console.log("server error");
+						}
 					});
 				// $state.go($state.current, {}, {reload: true});
 			}, function() {
@@ -126,7 +151,12 @@ admin.controller('AdminProductCtrl', ['$scope', '$state', '$modal','AdminService
 						console.log(data);
 						$state.go($state.current, {}, {reload: true});
 					}).error(function(data, status, headers, config) {
-						console.log("server error");
+						if(data=='not login') {
+							console.log("Hacker");
+							AdminService.redirect('login');
+						} else {
+							console.log("server error");
+						}
 					});
 				// $state.go($state.current, {}, {reload: true});
 			}, function() {

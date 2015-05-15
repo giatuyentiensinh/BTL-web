@@ -1,32 +1,64 @@
+<div ng-include="'tpl/blocks/admin-header.html'"></div>
 <div class="container">
 	<div class="row">
 		
+		<div class="col-md-12" style="margin: 10px;">
+			<p class="btn btn-info" ng-click="logout()">Đăng xuất <span class="fa fa-sign-out"></span></p>
+		</div>
+
 		<div class="col-md-12 panel-group" id="accordionPanel" aria-multiselectable="true">
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="panel-title">
-						<p class="text-info" data-toggle="collapse" data-parent="#accordionPanel" data-target="#changeName">Thay đổi tên tài khoản</p>
+						<p class="text-info h4" data-toggle="collapse" data-parent="#accordionPanel" data-target="#changeName">Thay đổi tên tài khoản</p>
 					</div>
 				</div>
 				<div class="panel-body panel-collapse collapse in" id="changeName">
-					<form class="form-horizontal">
+					<form class="form-horizontal" name="formChangeName">
 						<div class="form-group">
-							<label class="col-md-2 control-label">Tên mới</label>
-							<div class="col-md-10">
-								<input class="form-control" placeholder="Nhập tên mới"></input>
+							<label class="control-label col-md-3 h6">Tên tài khoản cũ</label>
+							<div class="col-md-7">
+								<input type="text" name="oldname" required ng-pattern="/^([a-zA-Z0-9]+)$/" ng-trim="true" ng-model="oldname" class="form-control" placeholder="Nhập tên tài khoản cũ"/>
 							</div>
 						</div>
+						<div class="form-group" ng-show="formChangeName.oldname.$dirty">
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangeName.oldname.$error.required"><span class="fa fa-bitbucket"></span> Không được bỏ trống</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangeName.oldname.$error.pattern"><span class="fa fa-bitbucket"></span> Chỉ nhập các ký tự là chữ số hoặc chữ cái, không chứa khoảng trắng và các ký tự unicode</p>
+						</div>
+
 						<div class="form-group">
-							<label class="col-md-2 control-label">Mật khẩu</label>
-							<div class="col-md-10">
-								<input type="password" class="form-control" placeholder="Xác nhận mật khẩu"></input>
+							<label class="control-label col-md-3 h6">Tên tài khoản mới</label>
+							<div class="col-md-7">
+								<input type="text" name="newname" required ng-pattern="/^([a-zA-Z0-9]+)$/" ng-trim="true" ng-model="newname" class="form-control" placeholder="Nhập tên tài khoản mới"/>
 							</div>
 						</div>
+						<div class="form-group" ng-show="formChangeName.newname.$dirty">
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangeName.newname.$error.required"><span class="fa fa-bitbucket"></span> Không được bỏ trống</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangeName.newname.$error.pattern"><span class="fa fa-bitbucket"></span> Chỉ nhập các ký tự là chữ số hoặc chữ cái, không chứa khoảng trắng và các ký tự unicode</p>
+						</div>
 						<div class="form-group">
-							<div class="col-md-offset-2 col-md-10">
-								<p class="btn btn-success"><span class="fa fa-check"></span> Thay đổi</p>
+							<label class="control-label col-md-3 h6">Mật khẩu</label>
+							<div class="col-md-7">
+								<input type="password" name="password" required ng-minlength="6" ng-maxlength="256" ng-pattern="/^([a-zA-Z0-9]+)$/" ng-trim="true" ng-model="password" class="form-control" placeholder="Xác nhận mật khẩu"/>
 							</div>
+						</div>
+						<div class="form-group" ng-show="formChangeName.password.$dirty">
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangeName.password.$error.required"><span class="fa fa-bitbucket"></span> Không được bỏ trống</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangeName.password.$error.minlength"><span class="fa fa-bitbucket"></span> Mật khẩu có ít nhất 6 ký tự</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangeName.password.$error.maxlength"><span class="fa fa-bitbucket"></span> Mật khẩu có tối đa 256 ký tự</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangeName.password.$error.pattern"><span class="fa fa-bitbucket"></span> Chỉ nhập các ký tự là chữ số hoặc chữ cái, không chứa khoảng trắng và các ký tự unicode</p>
+						</div>
+
+						<div ng-show='messageName.length > 0' ng-class="flugClass" ng-click="messageName=''">
+							<button class="close" aria-label="Close" ng-click="messageName=''">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							{{messageName}}
+						</div>
+
+						<div class="form-group" style="margin: 10px;">
+							<button class="btn btn-success col-md-offset-3" ng-disabled="formChangeName.$invalid" ng-click="changeName(oldname, password, newname)"><span class="glyphicon glyphicon-check"></span> Thay đổi</button>
 						</div>
 					</form>
 				</div>
@@ -35,34 +67,71 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="panel-title" href>
-						<p class="text-success collapsed" data-toggle="collapse" data-parent="#accordionPanel" data-target="#changePass">Thay đổi mật khẩu</p>
+						<p class="text-success collapsed h4" data-toggle="collapse" data-parent="#accordionPanel" data-target="#changePass">Thay đổi mật khẩu</p>
 					</div>
 				</div>
 				<div class="panel-body panel-collapse collapse" id="changePass">
-					<form class="form-horizontal">
+					<form class="form-horizontal" name="formChangePass">
 						<div class="form-group">
-							<label class="col-md-2 control-label">Mật khẩu hiện tại</label>
-							<div class="col-md-10">
-								<input type="password" class="form-control" placeholder="Nhập mật khẩu hiện tại"></input>
+							<label class="control-label col-md-3 h6">Tên tài khoản</label>
+							<div class="col-md-7">
+								<input type="text" name="username" required ng-pattern="/^([a-zA-Z0-9]+)$/" ng-trim="true" ng-model="username" class="form-control" placeholder="Nhập tên tài khoản"/>
 							</div>
 						</div>
+						<div class="form-group" ng-show="formChangePass.username.$dirty">
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangePass.username.$error.required"><span class="fa fa-bitbucket"></span> Không được bỏ trống</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangePass.username.$error.pattern"><span class="fa fa-bitbucket"></span> Chỉ nhập các ký tự là chữ số hoặc chữ cái, không chứa khoảng trắng và các ký tự unicode</p>
+						</div>
+
+						
 						<div class="form-group">
-							<label class="col-md-2 control-label">Mật khẩu mới</label>
-							<div class="col-md-10">
-								<input type="password" class="form-control" placeholder="Nhập mật khẩu mới"></input>
+							<label class="control-label col-md-3 h6">Mật khẩu cũ</label>
+							<div class="col-md-7">
+								<input type="password" name="oldpass" required ng-minlength="6" ng-maxlength="256" ng-pattern="/^([a-zA-Z0-9]+)$/" ng-trim="true" ng-model="oldpass" class="form-control" placeholder="Nhập mật khẩu cũ"/>
 							</div>
 						</div>
+						<div class="form-group" ng-show="formChangePass.oldpass.$dirty">
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangePass.oldpass.$error.required"><span class="fa fa-bitbucket"></span> Không được bỏ trống</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangePass.oldpass.$error.minlength"><span class="fa fa-bitbucket"></span> Mật khẩu có ít nhất 6 ký tự</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangePass.oldpass.$error.maxlength"><span class="fa fa-bitbucket"></span> Mật khẩu có tối đa 256 ký tự</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangePass.oldpass.$error.pattern"><span class="fa fa-bitbucket"></span> Chỉ nhập các ký tự là chữ số hoặc chữ cái, không chứa khoảng trắng và các ký tự unicode</p>
+						</div>	
+
 						<div class="form-group">
-							<label class="col-md-2 control-label">Xác nhận mật khẩu</label>
-							<div class="col-md-10">
-								<input type="password" class="form-control" placeholder="Xác nhận mật khẩu mới"></input>
+							<label class="control-label col-md-3 h6">Mật khẩu mới</label>
+							<div class="col-md-7">
+								<input type="password" name="newpass" required ng-minlength="6" ng-maxlength="256" ng-pattern="/^([a-zA-Z0-9]+)$/" ng-trim="true" ng-model="newpass" class="form-control" placeholder="Nhập mật khẩu mới"/>
 							</div>
 						</div>
+						<div class="form-group" ng-show="formChangePass.newpass.$dirty">
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangePass.newpass.$error.required"><span class="fa fa-bitbucket"></span> Không được bỏ trống</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangePass.newpass.$error.minlength"><span class="fa fa-bitbucket"></span> Mật khẩu có ít nhất 6 ký tự</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangePass.newpass.$error.maxlength"><span class="fa fa-bitbucket"></span> Mật khẩu có tối đa 256 ký tự</p>
+							<p class="col-md-offset-3 text-danger h6" ng-show="formChangePass.newpass.$error.pattern"><span class="fa fa-bitbucket"></span> Chỉ nhập các ký tự là chữ số hoặc chữ cái, không chứa khoảng trắng và các ký tự unicode</p>
+						</div>
+
 						<div class="form-group">
-							<div class="col-md-offset-2 col-md-10">
-								<p class="btn btn-success"><span class="fa fa-check"></span> Thay đổi</p>
+							<label class="control-label col-md-3 h6">Xác thực mật khẩu mới</label>
+							<div class="col-md-7">
+								<input type="password" ng-trim="true" ng-model="confirmpass" required ng-change="checkConfirm()" class="form-control" placeholder="Nhập lại mật khẩu mới"/>
 							</div>
 						</div>
+
+						<div class="form-group" ng-init="confirm=false">
+							<p class="col-md-offset-3 text-danger h6" ng-show="confirm"><span class="fa fa-bitbucket"></span> Mật khẩu mới không khớp</p>
+						</div>
+
+						<div ng-show='messagePass.length > 0' ng-class="flugClass" ng-click="messagePass=''">
+							<button class="close" aria-label="Close" ng-click="messagePass=''">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							{{messagePass}}
+						</div>
+
+						<div class="form-group" style="margin: 10px;">
+							<button class="btn btn-success col-md-offset-3" ng-disabled="formChangePass.$invalid" ng-click="changePass(username, oldpass, newpass)"><span class="glyphicon glyphicon-check"></span> Thay đổi</button>
+						</div>
+					</form>
 					</form>
 				</div>				
 			</div>

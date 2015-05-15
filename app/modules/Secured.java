@@ -5,26 +5,16 @@ import play.mvc.Result;
 import play.mvc.Security;
 import controllers.Authentication;
 
-public class Secured extends Security.Authenticator{
+public class Secured extends Security.Authenticator {
 
 	@Override
 	public String getUsername(Context ctx) {
-		Admin admin = null;
-		String[] authenToken = ctx.request().headers().get(Authentication.AUTH_TOKEN_HEADER);
-		if((authenToken != null) && (authenToken.length == 1) && (authenToken[0] != null)) {
-			admin = Admin.findByToken(authenToken[0]);
-			if(admin != null) {
-				ctx.args.put("admin", admin);
-				return admin.getUsername();
-			}
-		}
-		return null;
+		return ctx.session().get(Authentication.AUTH_TOKEN_HEADER);
 	}
-	
+
 	@Override
 	public Result onUnauthorized(Context ctx) {
-		return redirect("/");
+		return badRequest("not login");
 	}
-	
-	
+
 }

@@ -1,4 +1,5 @@
-<div class="container" ng-controller="AdminProductCtrl">
+<div ng-include="'tpl/blocks/admin-header.html'"></div>
+<div class="container">
 	<div class="row">
 		<div class="col-md-12 table-responsive">
 
@@ -28,11 +29,10 @@
 		<p class="btn btn-primary" ng-click="addPhone()"><span class="glyphicon glyphicon-plus"></span> Thêm sản phẩm mới</p>
 
 		<div class="col-md-12 text-center">
-		<pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" ng-change="changePagination()" items-per-page="itemPerPage"></pagination>
-	</div>
-	</div>
+			<pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" ng-change="changePagination()" items-per-page="itemPerPage"></pagination>
+		</div>
+	</div>	
 </div>
-
 
 <!-- change item -->
 <script type="text/ng-template" id="changePhoneId.html">

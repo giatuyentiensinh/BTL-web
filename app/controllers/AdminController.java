@@ -2,23 +2,29 @@ package controllers;
 
 import java.util.Map;
 
-import org.bson.types.ObjectId;
-
 import modules.Contact;
 import modules.Phone;
+import modules.Secured;
 import modules.UserBuyItem;
 import modules.phone.Camera;
 import modules.phone.Configuration;
 import modules.phone.Network;
+
+import org.bson.types.ObjectId;
+
 import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public class Admin extends Controller {
+@Security.Authenticated(Secured.class)
+public class AdminController extends Controller {
 
+	
+	/*Account*/
 	
 	/*Contact phone*/
 	public static Result readBill() {
@@ -48,8 +54,6 @@ public class Admin extends Controller {
 		
 		return ok(Json.toJson(Contact.readContactAll()));
 	}
-	
-	
 	
 	
 	/*CRUD phone*/

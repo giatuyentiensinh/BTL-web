@@ -1,4 +1,60 @@
-admin.factory('AdminService', ['$http', function($http) {
+admin.factory('AdminService', ['$http', '$state', function($http, $state) {
+
+	var login = function(username, password) {
+		return $http({
+			method: 'POST',
+			url: '/login',
+			headers: {
+				xsrfHeaderName: 'sercurity'
+			},
+			data: {
+				username: username,
+				password: password
+			}
+		});
+	};
+
+	var logout = function() {
+		return $http({
+			method: 'GET',
+			url: '/logout'
+		});
+	};
+
+	var changeAdminName = function(name, pass, newname) {
+		return $http({
+			method: 'POST',
+			url: '/account/changename',
+			headers: {
+				xsrfHeaderName: 'sercurity'
+			},
+			data: {
+				username: name,
+				password: pass,
+				newname: newname
+			}
+		});
+	};
+
+	var changeAdminPass = function(name, pass, newpass) {
+		return $http({
+			method: 'POST',
+			url: '/account/changepass',
+			headers: {
+				xsrfHeaderName: 'sercurity'
+			},
+			data: {
+				username: name,
+				password: pass,
+				newpass: newpass
+			}
+		});
+	};
+
+
+	var redirect = function(state) {
+		$state.go(state);
+	}
 
 	var doRequest = function(index, number) {
 		return $http({
@@ -85,6 +141,15 @@ admin.factory('AdminService', ['$http', function($http) {
 	};
 
 	return {
+		redirect: function(state) {
+			return redirect(state);
+		},
+		login: function(username, password) {
+			return login(username, password);
+		},
+		logout: function(){
+			return logout();
+		},
 		resultPage: function(index, number) {
 			return doRequest(index, number);
 		},
@@ -108,6 +173,12 @@ admin.factory('AdminService', ['$http', function($http) {
 		},
 		readComment: function() {
 			return readComment();
+		},
+		changeName: function(name, pass, newname) {
+			return changeAdminName(name, pass, newname);
+		},
+		changePass: function(name, pass, newpass) {
+			return changeAdminPass(name, pass, newpass);
 		}
 	}
 

@@ -8,20 +8,28 @@ admin.controller('AdminContactCtrl', ['$scope', '$modal', 'AdminService',
 				$scope.bills = data;
 			})
 			.error(function(data, status, headers, config) {
-				console.log("Error to server");
-				console.log(data);
+				if(data === 'not login') {
+					AdminService.redirect('login');
+				} else {
+					console.log("Error to server");
+					console.log(data);
+				}
 			});
 
 		AdminService.readComment()
 			.success(function(data, status, headers, config) {
-				console.log(data);
+				// console.log(data);
 				// console.log("success");
 				$scope.countComment = data.length;
 				$scope.comments = data;
 			})
 			.error(function(data, status, headers, config) {
-				console.log("Error to server");
-				console.log(data);
+				if(data === 'not login') {
+					AdminService.redirect('login');
+				} else {
+					console.log("Error to server");
+					console.log(data);
+				}
 			});
 
 
@@ -49,7 +57,7 @@ admin.controller('AdminContactCtrl', ['$scope', '$modal', 'AdminService',
 		}
 
 		$scope.showCommentId = function(comment) {
-			console.log(comment);
+			// console.log(comment);
 
 			var modalInstance = $modal.open({
 				animation: true,
@@ -93,7 +101,11 @@ admin.controller('ModalBillCtrl', ['$scope', '$modalInstance', 'bill', 'AdminSer
 					$scope.items.push(data);
 				})
 				.error(function(data, status, headers, config) {
-					console.log('error find item in bill');
+					if(data === 'not login') {
+						AdminService.redirect('login');
+					} else {
+						console.log('error find item in bill');
+					}
 				})			
 		}
 
