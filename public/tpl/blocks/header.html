@@ -1,12 +1,12 @@
-<header>
+<header ng-controller="searchCtrl">
 	<!-- Header-top -->
 	<div class="container-fluid bg-success">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-1">
 				<ul class="list-inline">
-					<li class="h6"><a href="#"><span class="glyphicon glyphicon-phone"></span> +84 976 508 106</a></li>
+					<li class="h6"><a href="#"><span class="glyphicon glyphicon-phone"></span> +84 167 629 8972</a></li>
 					<li></li>
-					<li class="h6"><a href="#"><span class="glyphicon glyphicon-envelope"></span> hangct11@gmail.com</a></li>
+					<li class="h6"><a href="#"><span class="glyphicon glyphicon-envelope"></span> 20122726@student.hut.edu.vn</a></li>
 				</ul>
 			</div>
 			<div class="col-md-6 text-right">
@@ -47,7 +47,7 @@
 							<li ui-sref-active="active"><a ui-sref="product.all"><i class="glyphicon glyphicon-phone"></i> Sản phẩm</a></li>
 							<li ui-sref-active="active"><a ui-sref="cart.cart"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
 							<li ui-sref-active="active"><a ui-sref="contact.contact"><i class="fa fa-book"></i> Liên hệ</a></li>
-							<li><a href data-target="#search" data-toggle="modal"><i class="fa fa-search"></i> Tìm kiếm</a></li>
+							<li><a href ng-click="search()"><i class="fa fa-search"></i> Tìm kiếm</a></li>
 						</ul>
 					</div>
 				</div>
@@ -56,29 +56,48 @@
 	</div>
 	<!-- /Header-bottom -->
 
-	<!-- Modal -->
-	<!-- Search -->
-	<div class="modal fade" id="search" aria-hidden="true" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<div class="modal-title h4"><span class="fa fa-search-plus"></span> Tìm kiếm</div>
-				</div>
-				<div class="modal-body">
-					<form class="form-vertical">
+</header>
+
+<!-- Modal -->
+
+<script type="text/ng-template" id="searchPhone.html">
+	<div class="modal-header">
+		<h3 class="modal-title h4">
+			<span class="fa fa-search-plus"></span> Tìm kiếm
+			<button type="button" class="close" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+		</h3>
+	</div>	
+	<div class="modal-body">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<form>
 						<div class="form-group">
-							<label class="control-label">Nhập thông tin tìm kiếm</label>
-							<input type="text" class="form-control"/>
+							<label class="control-label h5">Tìm kiếm</label>
+							<input type="text" class="form-control" ng-model="search" placeholder="Nhập nội dung cần tìm kiếm"/>
 						</div>
 					</form>
 				</div>
-				<div class="modal-footer">
-					<button class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Hủy bỏ</button>
-					<button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+				<div class="col-md-6">
+					<div class="list-group">
+						<a href class="list-group-item" ng-repeat="phone in phones | filter:search:name | orderBy: '-price'" ng-click="rederDetail(phone.id)">
+							<div class="phone-listing container">
+								<div class="row">
+									<div class="col-md-2">
+										<img ng-src="{{phone.image}}" class="img-thumbnail" />
+									</div>
+									<div class="col-md-3">
+										<p class="h6 text-danger">{{phone.name}}</p>
+										<p class="h6 text-warning">{{phone.price | number}} VNĐ</p>
+										<p>Hãng sản xuất: {{phone.provider}}</p>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- /Modal -->
-</header>
+</script>
+

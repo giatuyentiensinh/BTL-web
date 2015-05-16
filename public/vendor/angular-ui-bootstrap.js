@@ -1983,10 +1983,10 @@ angular.module('ui.bootstrap.pagination', [])
   itemsPerPage: 10,
   boundaryLinks: false,
   directionLinks: true,
-  firstText: 'First',
-  previousText: 'Previous',
-  nextText: 'Next',
-  lastText: 'Last',
+  firstText: 'Đầu tiên',
+  previousText: 'Trước',
+  nextText: 'Sau',
+  lastText: 'Cuối cùng',
   rotate: true
 })
 

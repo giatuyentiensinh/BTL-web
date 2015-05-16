@@ -2,7 +2,6 @@
 
 var app = angular.module('App', [
 	'ui.router',
-	'ui.load',
 	'ui.bootstrap',
 	'ngCookies'
 ]);
@@ -15,12 +14,7 @@ app.config([
 			.state('main', {
 				url: '/main',
 				abstract: true,
-				templateUrl: 'tpl/pages/home.html',
-				resolve: {
-							deps: ['uiLoad', function(uiLoad) {
-								return uiLoad.load(['js/controller/productCtrl.js']);
-							}]
-						}
+				templateUrl: 'tpl/pages/home.html'
 			})
 			.state('main.home', {
 				url: '/home',

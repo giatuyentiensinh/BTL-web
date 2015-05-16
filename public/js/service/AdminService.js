@@ -51,6 +51,12 @@ admin.factory('AdminService', ['$http', '$state', function($http, $state) {
 		});
 	};
 
+	var checkAdmin = function() {
+		return $http({
+			method: 'GET',
+			url: '/authentication',
+		});
+	}
 
 	var redirect = function(state) {
 		$state.go(state);
@@ -141,6 +147,9 @@ admin.factory('AdminService', ['$http', '$state', function($http, $state) {
 	};
 
 	return {
+		checkAdmin: function() {
+			return checkAdmin();
+		},
 		redirect: function(state) {
 			return redirect(state);
 		},

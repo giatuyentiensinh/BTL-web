@@ -24,7 +24,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class AdminController extends Controller {
 
 	
-	/*Account*/
+	/*Check admin*/
+	public static Result checkAdmin() {
+		return ok("Authenticated. You are admin");
+	}
 	
 	/*Contact phone*/
 	public static Result readBill() {

@@ -1,6 +1,14 @@
 admin.controller('AdminAccountCtrl', ['$scope', 'AdminService',
 	function($scope, AdminService) {
 
+		AdminService.checkAdmin()
+			.success(function(data, status, headers, config) {
+				console.log('success: ' + data);
+			})
+			.error(function(data, status, headers, config) {
+				AdminService.redirect('login');
+			});
+
 		$scope.logout = function() {
 			console.log('logout');
 			AdminService.logout()

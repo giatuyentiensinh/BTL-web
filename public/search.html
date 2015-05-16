@@ -4,34 +4,146 @@
 		<title>ngCookies</title>
 		<meta charset="utf-8" />
 		<script type="text/javascript" src="vendor/angular.min.js"></script>
-		<script type="text/javascript" src="vendor/angular-cookies.js"></script>
+		<script type="text/javascript" src="vendor/angular-animate.js"></script>
+		
 		<script type="text/javascript">
 			'use strict'
-			angular.module('app', ['ngCookies'])
-				.controller('ctrl', function($scope, $http) {					
-					$http.get('/store/phone')
-						.success(function(data) {
-							$scope.data = data;
-						})
-						.error(function(data) {
-							console.log('error cmrn');
-						});
-				});
+			var app = angular.module('app', ['ngAnimate'])
+
+			app.controller('ctrl', function($scope, $http) {					
+				$http({
+					method: 'GET',	
+					url: '/store/phone',
+					headers: {
+						xsrfHeaderName: 'sercurity',
+						offset: 0,
+						count: 10
+					}
+				})
+					.success(function(data) {
+						$scope.data = data;
+					})
+					.error(function(data) {
+						console.log('error cmrn');
+					});
+			});
 		</script>
+
+		<style type="text/css">
+			/*
+ * animations css stylesheet
+ */
+
+/* animate ngRepeat in phone listing */
+
+.phone-listing.ng-enter,
+.phone-listing.ng-leave,
+.phone-listing.ng-move {
+  -webkit-transition: 0.5s linear all;
+  -moz-transition: 0.5s linear all;
+  -o-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+}
+
+.phone-listing.ng-enter,
+.phone-listing.ng-move {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.phone-listing.ng-move.ng-move-active,
+.phone-listing.ng-enter.ng-enter-active {
+  opacity: 1;
+  height: 50px;
+}
+
+.phone-listing.ng-leave {
+  opacity: 1;
+  overflow: hidden;
+}
+
+.phone-listing.ng-leave.ng-leave-active {
+  opacity: 0;
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* cross fading between routes with ngView */
+
+.view-container {
+  position: relative;
+}
+
+.view-frame.ng-enter,
+.view-frame.ng-leave {
+  background: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.view-frame.ng-enter {
+  -webkit-animation: 0.5s fade-in;
+  -moz-animation: 0.5s fade-in;
+  -o-animation: 0.5s fade-in;
+  animation: 0.5s fade-in;
+  z-index: 100;
+}
+
+.view-frame.ng-leave {
+  -webkit-animation: 0.5s fade-out;
+  -moz-animation: 0.5s fade-out;
+  -o-animation: 0.5s fade-out;
+  animation: 0.5s fade-out;
+  z-index: 99;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-moz-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-webkit-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@-moz-keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@-webkit-keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+
+		</style>
+		
 	</head>
 	<body ng-app="app">
 		<div ng-controller="ctrl">
+			<input type="text" ng-model="search"/>
 			<table border="1">
-				<tr ng-repeat="dat in data | filter:search:id">
-					<td>{{dat.id}}</td>
+				<tr ng-repeat="dat in data | filter:search:name" class="phone-listing">
+					<!-- <td>{{dat.id}}</td> -->
 					<td>{{dat.name}}</td>
 					<td>{{dat.size}}</td>
-					<td>{{dat.weight}}</td>
+					<!-- <td>{{dat.weight}}</td>
 					<td>{{dat.price}}</td>
-					<td>{{dat.configuration | json}}</td>
+					<td>{{dat.configuration | json}}</td> -->
 				</tr>
 			</table>
-			<input type="text" ng-model="search"/>
 		</div>		
 	</body>
 </html>

@@ -4,6 +4,14 @@ admin.controller('AdminProductCtrl', ['$scope', '$modal','AdminService',
 		$scope.itemPerPage = 6;
 		$scope.currentPage = 1;
 
+		AdminService.checkAdmin()
+			.success(function(data, status, headers, config) {
+				console.log('success: ' + data);
+			})
+			.error(function(data, status, headers, config) {
+				AdminService.redirect('login');
+			});
+
 		AdminService.resultPage(0, 0)
 			.success(function(data, status, headers, config) {
 				$scope.totalItems = data;			

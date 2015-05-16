@@ -1,6 +1,8 @@
 # Home page
 GET		/		controllers.Assets.at(path="/public", file="index.html")
 
+GET		/1	controllers.Assets.at(path="/public", file="search.html")
+
 GET		/admin		controllers.Assets.at(path="/public", file="admin-index.html")
 
 # client
@@ -20,6 +22,7 @@ GET		/logout		controllers.Authentication.logout()
 POST	/account/changename		controllers.Authentication.changeName()
 POST	/account/changepass		controllers.Authentication.changePass()
 
+GET		/authentication		controllers.AdminController.checkAdmin()
 
 DELETE	/store/phone/:id	controllers.AdminController.deletePhone(id: String)
 PUT		/store/phone/:id	controllers.AdminController.updatePhone(id: String)
