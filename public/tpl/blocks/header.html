@@ -73,14 +73,22 @@
 				<div class="col-md-3">
 					<form>
 						<div class="form-group">
-							<label class="control-label h5">Tìm kiếm</label>
-							<input type="text" class="form-control" ng-model="search" placeholder="Nhập nội dung cần tìm kiếm"/>
+							<label class="control-label h5">Tìm kiếm theo tên</label>
+							<input type="text" class="form-control" ng-model="searchName" placeholder="Nhập tên điện thoại cần tìm kiếm"/>
+						</div>
+						<div class="form-group">
+							<label class="control-label h5">Tìm kiếm giá</label>
+							<input type="text" class="form-control" ng-model="searchPrice" placeholder="Nhập giá điện thoại"/>
+						</div>
+						<div class="form-group">
+							<label class="control-label h5">Tìm kiếm hãng sản xuất</label>
+							<input type="text" class="form-control" ng-model="searchProvider" placeholder="Nhập giá hãng sản xuất"/>
 						</div>
 					</form>
 				</div>
 				<div class="col-md-6">
 					<div class="list-group">
-						<a href class="list-group-item" ng-repeat="phone in phones | filter:search:name | orderBy: '-price'" ng-click="rederDetail(phone.id)">
+						<a href class="list-group-item" ng-repeat="phone in phones | filter:searchName:name | filter:searchPrice:price | filter:searchProvider:provider | orderBy: '-price'" ng-click="rederDetail(phone.id)">
 							<div class="phone-listing container">
 								<div class="row">
 									<div class="col-md-2">
