@@ -10,6 +10,8 @@ import org.mongojack.Id;
 import org.mongojack.JacksonDBCollection;
 import org.mongojack.MongoCollection;
 
+import play.Play;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,7 +19,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Phone {
 
 	public static final JacksonDBCollection<Phone, String> coll = JacksonDBCollection
-			.wrap(Connect.getCollection("btlweb", "phone"), Phone.class,
+			.wrap(Connect.getCollection(Play.application().configuration()
+					.getString("mongo.collection"), "phone"), Phone.class,
 					String.class);
 
 	@Id

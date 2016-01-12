@@ -9,11 +9,16 @@
 
 Sử dụng mongodb bản sách tay.
 
-``` command
+```shell
 # Bật server
 $ sudo ./mongod -replSet rs0
 
-# Import dữ liệu 
-$ ./mongoimport --db btlweb --collection phone --file <path đến file data.json>
-
 ```
+
+* `Note`: Chú ý, đường dẫn vật lý của mongodb, mặc định lưu trữ ở thư mục `/db/data`, nếu muốn lưu trữ ở thư mục khác thì sử dụng lệnh
+
+```shell
+$ ./mongod --dbpath <đường dẫn đến thư mục>
+```
+
+# Auth: Tuyenng

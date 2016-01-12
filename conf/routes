@@ -1,11 +1,8 @@
 # Home page
-GET		/		controllers.Assets.at(path="/public", file="index.html")
-
-GET		/1	controllers.Assets.at(path="/public", file="search.html")
-
+GET		/			controllers.Assets.at(path="/public", file="index.html")
 GET		/admin		controllers.Assets.at(path="/public", file="admin-index.html")
 
-# client
+# user
 GET		/store/phone	controllers.Application.phone()
 GET		/store/phone/:id controllers.Application.phoneId(id: String)
 GET		/store/category controllers.Application.category()
@@ -38,3 +35,5 @@ GET		/js/*file		controllers.Assets.at(path="/public/js", file)
 GET		/imgs/*file		controllers.Assets.at(path="/public/imgs", file)
 GET		/fonts/*file		controllers.Assets.at(path="/public/fonts", file)
 GET		/tpl/*file		controllers.Assets.at(path="/public/tpl", file)
+
+GET		/1	controllers.Assets.at(path="/public", file="search.html")

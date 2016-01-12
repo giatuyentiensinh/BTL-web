@@ -1,0 +1,2 @@
+{ "_id" : "567d955b60b2d14abb589034", "username" : "Nguyễn Đình Phúc", "phonenumber" : "01696999661", "email" : "dinhphucbka@gmail.com", "address" : "Hà Nội, Việt Nam", "item" : [ { "id" : "555360cdccbcc04cb1f07c18", "quantity" : 1 } ] }
+{ "_id" : "567d95f260b2d14abb589036", "username" : "Bùi Tuấn Ánh", "phonenumber" : "01578145512", "email" : "tuananh.baby@gmail.com", "address" : "Hà Nội", "item" : [ { "id" : "555360cdccbcc04cb1f07c18", "quantity" : 1 }, { "id" : "555360cdccbcc04cb1f07c19", "quantity" : 2 } ] }

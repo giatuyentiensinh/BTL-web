@@ -6,6 +6,8 @@ import org.mongojack.Id;
 import org.mongojack.JacksonDBCollection;
 import org.mongojack.MongoCollection;
 
+import play.Play;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,7 +15,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UserBuyItem {
 
 	private static final JacksonDBCollection<UserBuyItem, String> coll = JacksonDBCollection
-			.wrap(Connect.getCollection("btlweb", "userbyitem"),
+			.wrap(Connect.getCollection(Play.application().configuration()
+					.getString("mongo.collection"), "userbyitem"),
 					UserBuyItem.class, String.class);
 
 	@Id
@@ -46,10 +49,14 @@ public class UserBuyItem {
 		this.items = items;
 	}
 
+	public static Long count() {
+		return coll.count();
+	}
+	
 	public static List<UserBuyItem> readBill() {
 		return coll.find().toArray();
 	}
-	
+
 	public void save() {
 		coll.save(this);
 	}

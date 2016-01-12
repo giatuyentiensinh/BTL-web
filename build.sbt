@@ -2,7 +2,7 @@ import com.github.play2war.plugin._
 
 name := """web-cntt"""
 
-version := "1.0"
+version := "1.1"
 
 Play2WarPlugin.play2WarSettings
 
